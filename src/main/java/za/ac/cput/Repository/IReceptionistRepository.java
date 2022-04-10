@@ -1,3 +1,8 @@
+/* IReceptionistRepository.java
+   Interface for the receptionRepository
+   Author: Davin Shaun Carstens
+   Date: 08 April 2022 
+*/
 package za.ac.cput.Repository;
 
 import za.ac.cput.Entity.Receptionist;
