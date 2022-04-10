@@ -1,3 +1,8 @@
+/* Receptionist.java
+   Entity for Receptionist
+   Author: Davin Shaun Carstens
+   Date: 08 April 2022 
+*/
 package za.ac.cput.Entity;
 
 public class Receptionist
