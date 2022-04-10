@@ -1,6 +1,6 @@
 /* IBillRepository.java
    Interface for the billRepository
-   Author: Dvin Shaun Carstens
+   Author: Davin Shaun Carstens
    Date: 08 April 2022 
 */
 package za.ac.cput.Repository;
