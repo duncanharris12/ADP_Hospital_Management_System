@@ -1,3 +1,8 @@
+/* IBillRepository.java
+   Interface for the billRepository
+   Author: Dvin Shaun Carstens
+   Date: 08 April 2022 
+*/
 package za.ac.cput.Repository;
 
 import za.ac.cput.Entity.Bill;
