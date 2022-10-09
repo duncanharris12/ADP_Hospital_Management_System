@@ -1,9 +1,8 @@
 package za.ac.cput.Service.Interfaces;
 
-import za.ac.cput.Entity.Appointment;
 import za.ac.cput.Service.IService;
+import za.ac.cput.Entity.Appointment;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,6 +12,6 @@ import java.util.Set;
  */
 
 public interface IAppointmentService extends IService<Appointment, String> {
-   public List<Appointment> getAllAppointment();
+    Set<Appointment> getAll();
 
 }

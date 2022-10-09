@@ -4,18 +4,23 @@ package za.ac.cput.Controllers;
 //This is a Controller.java
 //This controller class is responsible for processing incoming REST API request, preparing a model and
 //returning the view
+//This is AppointmentController.java
 
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import za.ac.cput.Entity.Appointment;
 import org.springframework.web.bind.annotation.*;
 
-import za.ac.cput.Entity.Appointment;
-import za.ac.cput.Repository.IAppointmentRepository;
+import org.springframework.web.server.ResponseStatusException;
+
 import za.ac.cput.Service.Impl.AppointmentService;
 
 import javax.validation.Valid;
-import java.util.List;
+
 import java.util.Set;
 /**
  * @author: Chuma Nxazonke
@@ -31,37 +36,49 @@ import java.util.Set;
 public class AppointmentController {
 
 
-    private AppointmentService appointmentService;
+    private final AppointmentService appointmentService;
 
-
-    @PostMapping("/addAppointment")
-    public Appointment addAppointment (@RequestBody Appointment appointment){
-        return appointmentService.saveAppointment(appointment);
+    @Autowired
+    public AppointmentController(AppointmentService appointmentService){
+        this.appointmentService = appointmentService;
     }
 
-    @PostMapping("/addAppointment")
+    @PostMapping("save")
+    public ResponseEntity<Appointment> save(@Valid @RequestBody Appointment saveAppointment) {
+        log.info("Save request: {}", saveAppointment);
+        try {
+          Appointment appointment = this.appointmentService.saveAppointment(saveAppointment);
+            return ResponseEntity.ok(appointment);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 
-    public List<Appointment> addAppointment (@RequestBody List<Appointment> appointment){
-        return appointmentService.saveAppointment(appointment);
+        }
     }
 
-    @GetMapping ("/appointment")
-    public List<Appointment> findAllAppointment(){
-        return appointmentService.getAppointment();
+    @GetMapping("readAppointment/{appointmentID}")
+    public ResponseEntity<Appointment> read (@Valid @PathVariable String appointmentID){
+
+        log.info("Read request: {}", appointmentID);
+        try {
+         Appointment appointment = this.appointmentService.readAppointment(appointmentID);
+            return ResponseEntity.ok(appointment);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
-
-    @PutMapping("/update")
-    public Appointment addUpdate (@RequestBody Appointment appointment){
-        return appointmentService.updateAppointment(appointment);
+    @DeleteMapping("deleteAppointment/{appointmentID}")
+    public ResponseEntity<Appointment> delete (@PathVariable String appointmentID){
+        log.info("Delete request:", appointmentID);
+        this.appointmentService.deleteAppointment(appointmentID);
+        return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/delete{appointmentID}")
-    public boolean deleteAppointment(@PathVariable String appointmentID){
-        return  appointmentService.deleteAppointment(appointmentID);
+    @GetMapping("getAll")
+    public ResponseEntity<Set<Appointment>> getAll() {
+        Set<Appointment> appointmentSet = this.appointmentService.getAll();
+        return ResponseEntity.ok(appointmentSet);
     }
-
-
 
 
 }

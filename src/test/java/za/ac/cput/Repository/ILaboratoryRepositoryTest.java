@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *  Chuma Nxazonke
  *  Student Number: 219181187
  *  Date: 17 July 2022
- *  This is an updated version
+ *
  */
 
 class ILaboratoryRepositoryTest {
@@ -25,8 +25,13 @@ class ILaboratoryRepositoryTest {
     @BeforeEach
     void setUp(){
 
+        Patient pat = PatientFactory.createPatient("Nolubabalo Ndongeni","60 Longmarket Street", 67367872,"Female",23, "Hey@Healthy001" );
+        TestPatient testPatient = TestPatientFactory.createTestPatient("Urine Test", pat);
+        Department department = DepartmentFactory.createDepartment("NU","Nursing Unit", 50);
 
-        Laboratory laboratory = FactoryLaboratory.createLaboratory("Anezwa", "Dr Nxazonke", "Positive","Unit 23", "Tuesday", 500);
+        Doctor doctor = DoctorFactory.createDoctor("Chante Davids", "RandomPassword123", department,"Midwife Nurse");
+
+        Laboratory laboratory = FactoryLaboratory.createLaboratory("D154",pat,doctor,testPatient,"Medicine lab", "Monday", 500);
 
         assertNotNull(laboratory);
         System.out.println(laboratory);

@@ -10,7 +10,11 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import za.ac.cput.Entity.Department;
+import za.ac.cput.Entity.Doctor;
+import za.ac.cput.Factory.DepartmentFactory;
 import za.ac.cput.Entity.Appointment;
+import za.ac.cput.Factory.DoctorFactory;
 import za.ac.cput.Factory.FactoryAppointment;
 
 import java.util.Arrays;
@@ -31,12 +35,21 @@ class AppointmentControlllerTest {
 
     private TestRestTemplate restTemplate;
     private Appointment appointment;
+    private Doctor doctor;
+    private Department department;
     private String urlBase;
 
 
     @BeforeEach
     void setUp() {
-        this.appointment = FactoryAppointment.createAppointment("Dr Nxazonke", "Sickness", "I have a flue", "Monday","October");
+     this.department= DepartmentFactory.createDepartment(
+                "NU",
+                "Nursing Unit",
+                50);
+
+      this.doctor = DoctorFactory.createDoctor("Chante Davids", "RandomPassword123", department, "Midwife Nurse");
+
+        this.appointment = FactoryAppointment.createAppointment("B125", doctor,"Sickness", "I have a flue","Monday", "October");
         this.urlBase = "http://localhost:" + this.portNumber + "/hospital-management/appointment/";
 
         assertNotNull(appointmentController);

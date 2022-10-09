@@ -3,6 +3,7 @@ package za.ac.cput.Controllers;
 //This is a Controller.java
 //This controller class is responsible for processing incoming REST API request, preparing a model and
 //returning the view to be rendered as a response.
+//This is LaboratoryController.java
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import za.ac.cput.Entity.Appointment;
 import za.ac.cput.Entity.Laboratory;
-
 import za.ac.cput.Service.Impl.LaboratoryService;
-
-
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * @author Chuma Nxazonke
@@ -33,33 +30,43 @@ public class LaboratoryController {
 
     private LaboratoryService laboratoryService;
 
-
-    @PostMapping("/addLaboratory")
-    public Laboratory addLaboratory (@RequestBody Laboratory laboratory){
-        return laboratoryService.saveLaboratory(laboratory);
+    @Autowired
+    public LaboratoryController(LaboratoryService laboratoryService){
+        this.laboratoryService = laboratoryService;
     }
 
-    @PostMapping("/addLaboratory")
-
-    public List<Laboratory> addLaboratory (@RequestBody List<Laboratory> laboratoryList){
-        return laboratoryService.getAllLaboratory();
+    @PostMapping("save_laboratory")
+    public ResponseEntity<Laboratory> save(@Valid @RequestBody Laboratory saveLaboratory) {
+        log.info("Save request: {}", saveLaboratory);
+        try {
+            Laboratory laboratory = this.laboratoryService.saveLaboratory(saveLaboratory);
+            return ResponseEntity.ok(laboratory);
+        }catch(IllegalArgumentException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
-    @GetMapping ("/laboratory")
-    public List<Laboratory> findAllLaboratory(){
-        return laboratoryService.getAllLaboratory();
+    @GetMapping("readLaboratory/{labID}")
+    public ResponseEntity<Laboratory> read(@PathVariable String labID){
+        log.info("Read request: {}", labID);
+        try{
+            Laboratory laboratory = this.laboratoryService.readLaboratory(labID);
+            return ResponseEntity.ok(laboratory);
+        }catch(IllegalArgumentException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
-
-    @PutMapping("/update")
-    public Laboratory addUpdate (@RequestBody Laboratory laboratory){
-        return laboratoryService.updateLaboratory(laboratory);
+    @DeleteMapping("deleteLaboratory/{labID}")
+    public ResponseEntity<Laboratory> delete(@PathVariable String labID)   {
+        log.info("Delete request:", labID);
+       this.laboratoryService.deleteLaboratory(labID);
+        return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/delete{labID}")
-    public boolean deleteAppointment(@PathVariable String labID){
-        return  laboratoryService.deleteLaboratory(labID);
+    @GetMapping("getAllLaboratory")
+    public ResponseEntity<List<Laboratory>> getAllLaboratory(){
+        List<Laboratory> laboratoryList = this.laboratoryService.getAllLaboratory();
+        return ResponseEntity.ok(laboratoryList);
     }
-
-
 }

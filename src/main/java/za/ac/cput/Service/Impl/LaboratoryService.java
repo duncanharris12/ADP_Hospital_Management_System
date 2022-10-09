@@ -1,15 +1,12 @@
 package za.ac.cput.Service.Impl;
-
+//This is a LaratoryService.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import za.ac.cput.Entity.Appointment;
 import za.ac.cput.Entity.Laboratory;
 import za.ac.cput.Repository.ILaboratoryRepository;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author Chuma Nxazonke
@@ -49,19 +46,7 @@ public class LaboratoryService  {
         }
         return false;
     }
-    public Laboratory updateLaboratory (Laboratory laboratory) {
-        Laboratory existLaboratory = repository.findById(laboratory.getLabID()).orElse(null);
-        existLaboratory.setDoctor(laboratory.getDoctor());
-        existLaboratory.setPatient(laboratory.getPatient());
-        existLaboratory.setTestPatient(laboratory.getTestPatient());
-        existLaboratory.setLabName(laboratory.getLabName());
-        existLaboratory.setLabDay(laboratory.getLabDay());
-        existLaboratory.setAmount(laboratory.getAmount());
 
-
-        return this.repository.save(existLaboratory);
-
-    }
 
     public List<Laboratory> getAllLaboratory() {
         return this.repository.findAll();
