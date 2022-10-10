@@ -32,9 +32,9 @@ public class DoctorController {
     }
 
     @GetMapping("readDoctor/{doctorID}")
-    public ResponseEntity<Doctor> read(@PathVariable String doctorId){
-        log.info("read request: {}", doctorId);
-        Doctor read = this.service.read(doctorId);
+    public ResponseEntity<Doctor> read(@PathVariable String doctorID){
+        log.info("read request: {}", doctorID);
+        Doctor read = this.service.read(doctorID);
         return ResponseEntity.ok(read);
     }
 
