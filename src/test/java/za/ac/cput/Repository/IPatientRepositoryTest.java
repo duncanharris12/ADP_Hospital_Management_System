@@ -19,9 +19,8 @@ Date: 13 August 2022
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class IPatientRepositoryTest {
-    private final Patient patient = PatientFactory.createPatient( "Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");
-    @Autowired
-    private IPatientRepository repository;
+    private final Patient patient = PatientFactory.createPatient( "PHM245","Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");
+    @Autowired private IPatientRepository repository;
 
 
 
@@ -52,7 +51,7 @@ class IPatientRepositoryTest {
     @Test
     void findAll(){
         List<Patient> patientList = this.repository.findAll();
-        assertSame(5, patientList.size());
+        assertSame(10, patientList.size());
     }
 
 }

@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.Entity.TestPatient;
 
+import java.util.List;
 import java.util.Set;
 /**
  ITestPatientRepository.Java
@@ -15,5 +16,6 @@ import java.util.Set;
 
 @Repository
 public interface ITestPatientRepository extends JpaRepository<TestPatient, String> {
+
 
 }

@@ -27,21 +27,23 @@ public class DepartmentController {
     @PostMapping("save")
     public ResponseEntity<Department> save(@RequestBody @Valid Department department)
     {
+        log.info("save request: {}", department);
         Department saved = this.service.save(department);
         return  ResponseEntity.ok(saved);
     }
 
     @GetMapping("readDepartment/{departmentID}")
     public ResponseEntity<Department> read(@PathVariable String departmentID){
+
+        log.info("read request: {}", departmentID);
         Department read = this.service.read(departmentID);
         return ResponseEntity.ok(read);
     }
 
     @DeleteMapping("deleteDepartment/{departmentID}")
-    public ResponseEntity<Department> delete(@PathVariable String departmentID)   {
-        log.info("Delete request: {}", departmentID);
-        this.service.delete(departmentID);
-        return ResponseEntity.noContent().build();
+    public boolean delete(@PathVariable String departmentID){
+        log.info("delete request: {}", departmentID);
+        return service.delete(departmentID);
     }
 
     @GetMapping("getAll/department")

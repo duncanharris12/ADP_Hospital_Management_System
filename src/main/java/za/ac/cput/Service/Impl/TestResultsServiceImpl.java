@@ -1,12 +1,14 @@
 package za.ac.cput.Service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import za.ac.cput.Entity.TestResults;
 import za.ac.cput.Repository.ITestResultsRepository;
 import za.ac.cput.Service.Interfaces.ITestResultsService;
 
 import java.util.List;
 
+@Service
 public class TestResultsServiceImpl implements ITestResultsService {
     private final ITestResultsRepository repository;
 

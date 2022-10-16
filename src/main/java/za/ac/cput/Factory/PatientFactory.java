@@ -10,9 +10,9 @@ PatientFactory.Java
  Date: 10 April 2022
  **/
 public class PatientFactory {
-    public static Patient createPatient(String patientName ,String address,long phone_number, String sex,
+    public static Patient createPatient(String patientID,String patientName ,String address,long phone_number, String sex,
                                         int age,String patientPassword){
-        String patientID = Helper.generatePatientID();
+        //String patientID = Helper.generatePatientID();
 
         Patient patient = new Patient.Builder().setPatientID(patientID).setPatientName(patientName)
                 .setAddress(address)

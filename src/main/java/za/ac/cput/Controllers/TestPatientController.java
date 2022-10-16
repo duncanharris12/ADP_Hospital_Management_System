@@ -32,7 +32,7 @@ public class TestPatientController {
         this.testPatientService = testPatientService;
     }
 
-    @PostMapping("save/testPatient")
+    @PostMapping("save_testPatient")
     public ResponseEntity<TestPatient> save(@Valid @RequestBody TestPatient saveTestPatient) {
         log.info("Save request: {}", saveTestPatient);
         try {
@@ -43,7 +43,7 @@ public class TestPatientController {
         }
     }
 
-    @GetMapping("getTestPatient/{testID}")
+    @GetMapping("readTestPatient/{testID}")
     public ResponseEntity<TestPatient> read(@PathVariable String testID){
         log.info("Read request: {}", testID);
         try{
@@ -61,9 +61,9 @@ public class TestPatientController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("getTestPatients/testPatient")
+    @GetMapping("getTestPatients")
     public ResponseEntity<List<TestPatient>> getAll(){
-        List<TestPatient> testPatientsList =  this.testPatientService.getTestPatients();
+        List<TestPatient> testPatientsList =  this.testPatientService.getAll();
         return ResponseEntity.ok(testPatientsList);
     }
 }

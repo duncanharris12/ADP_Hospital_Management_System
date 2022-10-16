@@ -9,7 +9,7 @@ class PatientFactoryTest {
 
     @Test
     void createPatient() {
-        Patient pat = PatientFactory.createPatient("Nolubabalo Ndongeni","60 Hug Street", 67367872,"Female",23, "Hey" );
+        Patient pat = PatientFactory.createPatient("PHM346" ,"Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");
         assertNotNull(pat);
         System.out.println(pat);
 

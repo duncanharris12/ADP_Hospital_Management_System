@@ -23,42 +23,44 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DoctorServiceTest {
 
-        private final Department department = DepartmentFactory.createDepartment("NU", "Nursing Unit", 50);
-        private final Doctor doctor = DoctorFactory.createDoctor("Chante Davids", "RandomPassword123", department, "Midwife Nurse");
+    private Department department = DepartmentFactory.createDepartment("NU", "Nursing Unit", 50);
+    private final Doctor doctor = DoctorFactory.createDoctor("CLD0609","Chante Davids", "RandomPassword123", department,"Midwife Nurse");
 
-        @Autowired
-        private DoctorService service;
+    @Autowired private DoctorService service;
+    @Autowired private DepartmentService depservice;
 
-        @Test
-        @Order(1)
-        void save() {
-            System.out.println("Created: ");
-            Doctor save = service.save(doctor);
-            assertNotNull(doctor);
-            System.out.println(save);
-            System.out.println(department);
-        }
+    @Test
+    @Order(1)
+    void save() {
+        System.out.println("Created: ");
+        department = depservice.save(department);
+        Doctor save = service.save(doctor);
+        assertNotNull(doctor);
+        System.out.println(save);
+        System.out.println(doctor.getDoctorID());
+    }
 
-        @Test
-        @Order(2)
-        void read() {
-            Doctor read = service.read(doctor.getDoctorID());
-            assertEquals(read.getDoctorID(), doctor.getDoctorID());
-            System.out.println("Read: " + read);
-        }
+    @Test
+    @Order(2)
+    void read() {
+        Doctor read = service.read(doctor.getDoctorID());
+        assertEquals(read.getDoctorID(), doctor.getDoctorID());
+        System.out.println("Read: " + read);
 
-        @Test
-        @Order(3)
-        void getAll() {
-            System.out.println("Get All: ");
-            System.out.println(service.getAll());
-        }
+    }
 
-        @Test
-        @Order(4)
-        void delete() {
-            boolean success = service.delete(doctor.getDoctorID());
-            assertTrue(success);
-            System.out.println("Deleted: " + success);
-        }
+    @Test
+    @Order(3)
+    void getAll() {
+        System.out.println("Get All: ");
+        System.out.println(service.getAll());
+    }
+
+    @Test
+    @Order(4)
+    void delete() {
+        boolean success = service.delete(doctor.getDoctorID());
+        assertTrue(success);
+        System.out.println("Deleted: "+ success);
+    }
 }

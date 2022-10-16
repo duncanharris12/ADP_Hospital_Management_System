@@ -4,6 +4,7 @@ import za.ac.cput.Entity.Patient;
 import za.ac.cput.Service.IService;
 
 import java.util.List;
+import java.util.Set;
 /*
 IPatientService
 Name: Nolubabalo Ndongeni
@@ -12,9 +13,10 @@ Date: 13 August 2022
  */
 
 public interface IPatientService extends IService<Patient, String> {
-    List<Patient> getPatients();
+    Set<Patient> getAll();
+    //List<Patient> getPatients();
 
-    List<Patient> findAll();
+
     //Patient getPatientByName(String patientName);
 
 }

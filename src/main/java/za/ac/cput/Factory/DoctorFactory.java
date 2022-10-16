@@ -12,11 +12,11 @@ import za.ac.cput.Entity.Department;
         import za.ac.cput.util.Helper;
 
 public class DoctorFactory {
-    public static Doctor createDoctor(String doctorName, String doctorPassword,
+    public static Doctor createDoctor(String doctorID, String doctorName, String doctorPassword,
                                       Department department,
                                       String specialty)
     {
-        String doctorID = Helper.generateDoctorID();
+        //String doctorID = Helper.generateDoctorID();
 
         return new Doctor.Builder()
                 .setDoctorID(doctorID)

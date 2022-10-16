@@ -17,12 +17,8 @@ class DoctorFactoryTest {
 
     @Test
     void createDoctor() {
-//        Doctor doctor = DoctorFactory.createDoctor("Chante Davids", "RandomPassword123", DepartmentFactory.createDepartment("NU", "Nursing Unit", 50),"Midwife Nurse");
-//        assertNotNull(doctor);
-//        System.out.println(doctor);
-//
         Department department = DepartmentFactory.createDepartment("NU", "Nursing Unit", 50);
-        Doctor doctor = DoctorFactory.createDoctor("Chante Davids", "RandomPassword123", department,"Midwife Nurse");
+        Doctor doctor = DoctorFactory.createDoctor("CLD0609","Chante Davids", "RandomPassword123", department,"Midwife Nurse");
         assertNotNull(doctor);
         System.out.println(doctor);
     }

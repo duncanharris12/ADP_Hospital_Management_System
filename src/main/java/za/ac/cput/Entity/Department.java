@@ -9,8 +9,10 @@ package za.ac.cput.Entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,10 +21,15 @@ public class Department implements Serializable {
     @Id
     @Column(name = "department_id")
     private String departmentID;
+
     @NotNull
     private String departmentName;
+
     @NotNull
     private int departmentSize;
+
+    @OneToMany(mappedBy = "department")
+    private List<Doctor> doctors;
 
     protected Department() {
     }

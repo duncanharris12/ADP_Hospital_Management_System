@@ -14,5 +14,5 @@ import java.util.List;
 import java.util.Set;
 
 public interface IDepartmentService extends IService<Department, String>{
-    public Set<Department> getAll();
+    Set<Department> getAll();
 }

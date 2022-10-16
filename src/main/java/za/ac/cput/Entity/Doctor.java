@@ -17,15 +17,16 @@ public class Doctor implements Serializable {
     @Id
     @Column(name = "doctor_id")
     private String doctorID;
+
     @NotNull
     private String doctorName;
+
     @NotNull
     private String doctorPassword;
 
-    //@OneToMany
-    //@JoinColumn(name = "department_id", referencedColumnName = "department_id")
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "department_department_id")
+    @JoinColumn(name = "department_id")
     private Department department;
 
     @NotNull

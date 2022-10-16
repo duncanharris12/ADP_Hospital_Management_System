@@ -1,9 +1,6 @@
 package za.ac.cput.Controllers;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -40,27 +37,30 @@ class DoctorControllerTest {
 
     @BeforeEach
     void setUp() {
-        assertNotNull(doctorController);
+        //assertNotNull(doctorController);
         this.department = DepartmentFactory.createDepartment("NU", "Nursing Unit", 50);
-        this.doctor = DoctorFactory.createDoctor("Chante Davids", "RandomPassword123", department,"Midwife Nurse");
+        this.doctor = DoctorFactory.createDoctor("CLD0609","Chante Davids", "RandomPassword123", department,"Midwife Nurse");
         this.urlBase = "http://localhost:" + this.portNumber + "/hospital-management/doctor/";
     }
 
     @Test
-    void a_save() {
-        String url = urlBase + "saveDoctor";
+    @Order(1)
+    void save() {
+        String url = urlBase + "save";
         System.out.println(url);
 
-        ResponseEntity<Doctor> doctorResponseEntity = this.restTemplate.postForEntity(url, this.doctor, Doctor.class);
+        ResponseEntity<Doctor> doctorResponseEntity = this.restTemplate
+                .postForEntity(url, this.doctor, Doctor.class);
         System.out.println(doctorResponseEntity);
 
-        assertAll(()-> assertEquals(HttpStatus.OK, doctorResponseEntity.getStatusCode()),
+        assertAll(
+                ()-> assertEquals(HttpStatus.OK, doctorResponseEntity.getStatusCode()),
                 ()-> assertNotNull(doctorResponseEntity.getBody()));
-        System.out.println("Doctor saved!");
     }
 
     @Test
-    void b_read() {
+    @Order(2)
+    void read() {
         String url = urlBase + "readDoctor/" + doctor.getDoctorID();
         System.out.println(url);
 
@@ -72,25 +72,25 @@ class DoctorControllerTest {
     }
 
     @Test
-    void d_delete() {
+    @Order(3)
+    void delete() {
         String url = urlBase + "deleteDoctor/" + doctor.getDoctorID();
         this.restTemplate.delete(url);
 
-        assertAll(()->assertSame("1",doctor.getDoctorID()),
-                ()->assertNotNull(doctor.getDoctorName()));
-        System.out.println("Delete successful!");
-    }
+        assertNotNull(doctor.getDoctorName());
+        System.out.println("Delete successful!");    }
 
     @Test
-    void e_getAll() {
-        String url = urlBase + "getDoctors";
+    @Order(4)
+    void getAll() {
+        String url = urlBase + "getAll/doctor";
         System.out.println(url);
 
         ResponseEntity<Doctor[]> responseEntity =this.restTemplate.getForEntity(url, Doctor[].class);
         System.out.println(Arrays.asList((Objects.requireNonNull(responseEntity.getBody()))));
 
         assertAll(()-> assertEquals(HttpStatus.OK, responseEntity.getStatusCode()),
-                ()-> assertTrue(responseEntity.getBody().length == 0),
+                ()-> assertEquals(0, responseEntity.getBody().length),
                 ()-> assertNotNull(responseEntity));
     }
 }

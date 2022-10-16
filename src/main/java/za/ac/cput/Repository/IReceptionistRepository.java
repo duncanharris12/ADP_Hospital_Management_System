@@ -12,6 +12,5 @@ import java.util.Set;
 @Repository
 public interface IReceptionistRepository extends JpaRepository<Receptionist, String>
 {
-    @Override
-    List<Receptionist> findAllById(Iterable<String> strings);
+
 }

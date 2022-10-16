@@ -14,11 +14,14 @@ import za.ac.cput.Repository.IPatientRepository;
 import za.ac.cput.Service.Interfaces.IPatientService;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PatientService implements IPatientService {
 
     private  final IPatientRepository repository;
+
 
     @Autowired
     public PatientService(IPatientRepository iPatientRepository){
@@ -29,15 +32,15 @@ public class PatientService implements IPatientService {
     //create or save
     @Override
     public Patient save(Patient patient){
-        return repository.save(patient);
+        return this.repository.save(patient);
     }
 
 
 
     //read
     @Override
-    public Patient read(String patientId){
-        return repository.findById(patientId).orElse(null);
+    public Patient read(String patientID){
+        return this.repository.findById(patientID).orElse(null);
     }
 
 
@@ -60,10 +63,12 @@ public class PatientService implements IPatientService {
     }
 
     //findAll
-    public List<Patient> getPatients(){
-        return repository.findAll();
-    }
 
+
+    @Override
+    public Set<Patient> getAll() {
+        return this.repository.findAll().stream().collect(Collectors.toSet());
+    }
 
 
 }

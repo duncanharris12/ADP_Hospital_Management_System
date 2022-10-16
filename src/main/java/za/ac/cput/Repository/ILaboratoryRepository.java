@@ -18,5 +18,5 @@ import java.util.Set;
 @Repository
 public interface ILaboratoryRepository extends JpaRepository<Laboratory, String> {
 
-    public List<Laboratory> getAllLaboratory();
+
 }

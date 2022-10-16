@@ -6,13 +6,25 @@ package za.ac.cput.Entity;
 */
 
 
-public class Medication {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
+@Entity
+public class Medication implements Serializable
+{
+
+    @Id
     private String medicationID;
+    @NotNull
     private String medicationName;
+    @NotNull
     private float medicationPrice;
+    @NotNull
     private int medicationQuantity;
 
+    protected Medication(){}
 
     private Medication(Builder builder) {
         this.medicationID = builder.medicationID;

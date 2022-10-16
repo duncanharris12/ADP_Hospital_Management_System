@@ -29,52 +29,42 @@ public class PatientController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<Patient> save(@Valid @RequestBody Patient patient)
-    {
-        log.info("Save request: {}", patient);
-        Patient save = patientService.save(patient);
-        return ResponseEntity.ok(save);
-        /*
+    public ResponseEntity<Patient> save(@Valid @RequestBody Patient savePatient) {
+        log.info("Save request: {}", savePatient);
+        try {
+            Patient patient = this.patientService.save(savePatient);
+            return ResponseEntity.ok(patient);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 
-       try{
-           Patient patient = this.patientService.save(savePatient);
-           return  ResponseEntity.ok(patient);
-       }catch (IllegalArgumentException e){
-           throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-       }*/
-
+        }
     }
 
     @GetMapping("readPatient/{patientID}")
-    public ResponseEntity<Patient> read(@Valid @PathVariable String patientID){
-         /*
-        Patient patient = this.patientService.read(patientID)
-                .orElse(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return ResponseEntity.ok(patient);*/
+    public ResponseEntity<Patient> read (@Valid @PathVariable String patientID){
 
         log.info("Read request: {}", patientID);
-        try{
+        try {
             Patient read = this.patientService.read(patientID);
             return ResponseEntity.ok(read);
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("deletePatient/{patientID}")
-    public ResponseEntity<Patient> delete(@PathVariable String patientID)   {
+    @DeleteMapping("deletePatient/{id}")
+    public ResponseEntity<Patient> delete (@PathVariable String patientID){
         log.info("Delete request:", patientID);
         this.patientService.delete(patientID);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("all")
-    public ResponseEntity<List<Patient>> findAll(){
-        List<Patient> patient =  this.patientService.findAll();
-        return ResponseEntity.ok(patient);
+    public ResponseEntity<Set<Patient>> getAll() {
+        Set<Patient> patientSet = this.patientService.getAll();
+        return ResponseEntity.ok(patientSet);
     }
 
 
-
-
 }
+

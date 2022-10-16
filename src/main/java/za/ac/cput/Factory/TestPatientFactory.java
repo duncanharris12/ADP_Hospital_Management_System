@@ -14,9 +14,9 @@ import za.ac.cput.util.Helper;
  **/
 
 public class TestPatientFactory {
-    public static TestPatient createTestPatient(String testName, Patient patient)
+    public static TestPatient createTestPatient(String testID,String testName, Patient patient)
     {
-        String testID = Helper.generateTestID();
+        //String testID = Helper.generateTestID();
 
         TestPatient testPatient = new TestPatient.Builder().setTestID(testID).setTestName(testName).setPatient(patient).build();
         return testPatient;

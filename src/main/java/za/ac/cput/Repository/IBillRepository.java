@@ -12,6 +12,5 @@ import java.util.Set;
 @Repository
 public interface IBillRepository extends JpaRepository<Bill,String>
 {
-    @Override
-    List<Bill> findAllById(Iterable<String> strings);
+
 }

@@ -26,35 +26,35 @@ Date: 14 August 2022
 class TestPatientServiceTest {
 
 
-    @Autowired
-    private TestPatientService service;
+    @Autowired private TestPatientService service;
+
     private Patient patient;
-
-    //private final Patient patient = PatientFactory.createPatient( "Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");;
-    private final TestPatient testPatient = TestPatientFactory.createTestPatient("Drug test", patient);
-
+    //private final Patient patient = PatientFactory.createPatient( "PHM334","Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");;
+    private final TestPatient testPatient = TestPatientFactory.createTestPatient("THM878","Drug test", patient);
+    @Order(1)
     @Test
-    void a_save() {
+    void save() {
         TestPatient save  = service.save(this.testPatient);
         assertEquals(this.testPatient, save);
     }
 
+    @Order(2)
     @Test
-    void b_read() {
+    void read() {
         TestPatient read = service.read(testPatient.getTestID());
         assertNotNull(read);
     }
 
-
+    @Order(4)
     @Test
-    void d_delete() {
+    void delete() {
         service.delete(testPatient.getTestID());
         assertNotNull(testPatient);
         System.out.println("Deleted: " + testPatient);
     }
-
+     @Order(3)
     @Test
-    void c_getTestPatients(){
+    void getTestPatients(){
         System.out.println("Get all testPatients: ");
         System.out.println(service.getTestPatients());
     }

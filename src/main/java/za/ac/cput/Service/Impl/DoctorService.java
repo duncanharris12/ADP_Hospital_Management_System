@@ -8,6 +8,7 @@ Date: 13 August 2022
 package za.ac.cput.Service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import za.ac.cput.Entity.Doctor;
 import za.ac.cput.Repository.IDoctorRepository;
 import za.ac.cput.Service.Interfaces.IDoctorService;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service
 public class DoctorService implements IDoctorService {
 
     private final IDoctorRepository repository;

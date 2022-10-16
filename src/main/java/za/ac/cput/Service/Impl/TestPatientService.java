@@ -51,11 +51,15 @@ public class TestPatientService implements ITestPatientService {
         return false;
     }
 
-    //findAll
-    public List<TestPatient> getTestPatients(){
+//    //findAll
+//    public List<TestPatient> getTestPatients(){
+//        return repository.getAll();
+//    }
+
+    @Override
+    public List<TestPatient> getAll() {
         return repository.findAll();
     }
-
 
 
 }

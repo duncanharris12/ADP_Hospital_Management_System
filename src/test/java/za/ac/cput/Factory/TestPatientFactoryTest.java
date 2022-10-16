@@ -11,10 +11,10 @@ class TestPatientFactoryTest {
     @Test
     void createTestPatient() {
 
-            Patient patient = PatientFactory.createPatient("Nolubabalo Ndongeni","60 Longmarket Street", 67367872,"Female",23, "Hey@Healthy001" );
-            TestPatient testPatient = TestPatientFactory.createTestPatient("Urine Test", patient);
-            assertNotNull(testPatient);
-            System.out.println(testPatient);
+        Patient patient = PatientFactory.createPatient("PHM563" ,"Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");
+        TestPatient testPatient = TestPatientFactory.createTestPatient("THM341","Urine Test", patient);
+        assertNotNull(testPatient);
+        System.out.println(testPatient);
 
 
     }

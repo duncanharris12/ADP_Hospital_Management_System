@@ -12,6 +12,8 @@ Student number: 219319464
 Date: 13 August 2022
  */
 public interface ITestPatientService extends IService<TestPatient, String> {
-    List<TestPatient> getTestPatients();
+    //List<TestPatient> getTestPatients();
+    List<TestPatient> getAll();
+
 
 }

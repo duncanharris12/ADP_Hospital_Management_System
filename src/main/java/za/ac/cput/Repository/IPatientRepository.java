@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.Entity.Patient;
 
+import java.util.List;
 import java.util.Set;
 /**
  IPatientRepository.Java
@@ -15,5 +16,4 @@ import java.util.Set;
 
 @Repository
 public interface IPatientRepository extends JpaRepository<Patient, String> {
-    Patient findByName(String patientName);
 }

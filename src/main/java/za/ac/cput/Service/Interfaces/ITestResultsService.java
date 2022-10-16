@@ -10,6 +10,7 @@ import za.ac.cput.Service.IService;
 
 import java.util.List;
 
+
 public interface ITestResultsService extends IService<TestResults, String> {
     List<TestResults> getTestResults();
 

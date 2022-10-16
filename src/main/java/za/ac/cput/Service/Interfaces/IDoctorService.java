@@ -12,5 +12,5 @@ import za.ac.cput.Service.IService;
 import java.util.Set;
 
 public interface IDoctorService extends IService<Doctor, String> {
-    public Set<Doctor> getAll();
+    Set<Doctor> getAll();
 }
