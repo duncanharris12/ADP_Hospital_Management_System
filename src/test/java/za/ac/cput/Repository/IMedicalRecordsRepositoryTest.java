@@ -19,10 +19,10 @@ class IMedicalRecordsRepositoryTest {
     @BeforeEach
     void setUp() {
         this.medicalRecords = MedicalRecordsFactory.createMedicalRecords("22"
-                ,"Duncan"
-                ,28
-                ,"Male"
-                ,"False");
+              ,"Duncan"
+              ,28
+              ,"Male"
+               ,"False");
         assertNotNull(medicalRecords);
     }
 
