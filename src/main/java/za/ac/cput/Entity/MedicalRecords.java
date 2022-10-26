@@ -18,7 +18,7 @@ public class MedicalRecords implements Serializable
     //@Column(name = "")
     private String recordID;
     @ManyToOne
-    @JoinColumn(name = "testID", referencedColumnName = "testID")
+    @JoinColumn(name = "test_id", referencedColumnName = "test_id")
     private TestResults testResults;
 
     protected MedicalRecords(){}
