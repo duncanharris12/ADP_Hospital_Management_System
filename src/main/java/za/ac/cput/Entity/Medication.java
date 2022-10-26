@@ -6,6 +6,7 @@ package za.ac.cput.Entity;
 */
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,8 @@ public class Medication implements Serializable
 {
 
     @Id
+    @Column
+    @NotNull
     private String medicationID;
     @NotNull
     private String medicationName;

@@ -7,6 +7,8 @@ import za.ac.cput.Repository.ITestResultsRepository;
 import za.ac.cput.Service.Interfaces.ITestResultsService;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TestResultsServiceImpl implements ITestResultsService {
@@ -40,8 +42,8 @@ public class TestResultsServiceImpl implements ITestResultsService {
 
 
     @Override
-    public List<TestResults> getTestResults() {
-        return null;
+    public Set<TestResults> getAll() {
+        return this.repository.findAll().stream().collect(Collectors.toSet());
 
     }
 }

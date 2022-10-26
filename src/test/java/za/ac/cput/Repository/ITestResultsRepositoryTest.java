@@ -6,10 +6,9 @@ package za.ac.cput.Repository;
 */
 
 import org.junit.jupiter.api.*;
-import za.ac.cput.Entity.Department;
-import za.ac.cput.Entity.Doctor;
-import za.ac.cput.Entity.TestPatient;
-import za.ac.cput.Entity.TestResults;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import za.ac.cput.Entity.*;
 
 import za.ac.cput.Factory.*;
 
@@ -18,34 +17,30 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+@SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ITestResultsRepositoryTest {
 
-    private ITestResultsRepository repository;
-    private TestResults testResults;
+    private  final Patient patient = PatientFactory.createPatient("PHM346" ,"Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");
+    private final TestPatient testPatient = TestPatientFactory.createTestPatient("122001","test",patient);
+    private  final TestResults testResults = TestResultsFactory.createTestResults("855",patient,testPatient,"12 December 2022","HIV test results");
 
-    @BeforeEach
-    void setUp(){
 
-        TestResults testResults = TestResultsFactory.createTestResults("Onele Tomson","F","122001","29 Aug 2022","Estimate of when the baby will be delivered");
-        Department department = DepartmentFactory.createDepartment("Women", "Labour", 20);
-        Doctor doctor = DoctorFactory.createDoctor("Onele", "Tom2001", department,"Child Birth");
-        TestPatient testPatient = TestPatientFactory.createTestPatient("Delivery Date Test");
-        assertNotNull(testResults);
-        System.out.println(testResults);
-    }
+    @Autowired private ITestResultsRepository repository;
 
-    @Test
+
+
     @Order(1)
+    @Test
     void save(){
         TestResults save = this.repository.save(this.testResults);
         assertEquals(this.testResults,save);
     }
 
-    @Test
     @Order(2)
+    @Test
     void read() {
-        TestResults read = this.repository.getById(this.testResults.getTestID());
+        TestResults read = this.repository.getById(this.testResults.getTestResultsID());
     }
 
 
@@ -53,7 +48,7 @@ class ITestResultsRepositoryTest {
     @Test
     @Order(4)
     void delete() {
-        this.repository.deleteById(this.testResults.getTestID());
+        this.repository.deleteById(this.testResults.getTestResultsID());
         List<TestResults> testResultsList = this.repository.findAll();
         assertSame(0, testResultsList.size());
     }
