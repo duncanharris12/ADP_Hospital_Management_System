@@ -12,10 +12,13 @@ import za.ac.cput.Entity.Patient;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ViewPatient extends JFrame
+public class ViewPatient extends JFrame implements ActionListener
 {
     public static final MediaType JSON
             = MediaType.get("application/JSON; charset=utf-8");
@@ -26,8 +29,11 @@ public class ViewPatient extends JFrame
     private ArrayList<Patient> rows;
     private JTable tblPatient;
 
+    private JButton btnBack;
+
     private JPanel pnlCenter;
 
+    private JPanel pnlSouth;
     private DefaultTableModel dm;
     //
     public ViewPatient()
@@ -35,16 +41,24 @@ public class ViewPatient extends JFrame
         super("View Patients");
         rows = new ArrayList<>();
         dm = new DefaultTableModel(col,0);
+        btnBack = new JButton("Back");
         tblPatient = new JTable(dm);
+        pnlSouth = new JPanel();
         pnlCenter = new JPanel();
     }
 
     public void setGUI()
     {
         add(new JScrollPane(tblPatient));
+        add(pnlSouth, BorderLayout.SOUTH);
+        pnlSouth.setLayout(new GridLayout());
+        pnlSouth.add(btnBack);
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+
+
+        btnBack.addActionListener(this);
         getAll();
         populateTable();
     }
@@ -103,5 +117,13 @@ public class ViewPatient extends JFrame
 
     public static void main(String[] args) {
         new ViewPatient().setGUI();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == btnBack){
+            new PatientMain().setGUI();
+            new ViewPatient().dispose();
+        }
     }
 }

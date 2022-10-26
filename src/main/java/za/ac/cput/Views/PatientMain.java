@@ -39,7 +39,7 @@ public class PatientMain extends JFrame implements ActionListener
 
     public PatientMain()
     {
-        super("Read Patient Account");
+        super("Patient Account");
 
         lblPatientID = new JLabel("Patient ID");
         boxPatientID = new JComboBox();
