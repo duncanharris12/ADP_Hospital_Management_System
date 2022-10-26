@@ -1,4 +1,4 @@
-package za.ac.cput.View;
+package za.ac.cput.Views;
 
 
 import javax.swing.*;
@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static za.ac.cput.View.OkHttp.save;
+import static za.ac.cput.Views.OkHttp.save;
 
 
 public class Registration1 extends JDialog implements ActionListener{
@@ -94,7 +94,11 @@ public class Registration1 extends JDialog implements ActionListener{
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Error-could not register");
             }
-            new PatientMainForm(null);
+
+            new PatientMainScreen( null);
+
+
+
 
 
         }
@@ -110,6 +114,7 @@ public class Registration1 extends JDialog implements ActionListener{
 
     public static void main(String[] args) {
         Registration1 registration1 = new Registration1( null);
+
     }
 
 

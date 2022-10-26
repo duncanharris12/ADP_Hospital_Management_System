@@ -22,7 +22,7 @@ public class Patient implements Serializable {
 
 
     @Id
-   //@GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name= "patient_id")
     private String patientID;
     @NotNull
@@ -38,9 +38,7 @@ public class Patient implements Serializable {
     @NotNull
     private String patientPassword;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "test_patient_id")
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private TestPatient testPatient;
     protected Patient(){
     }
@@ -56,7 +54,6 @@ public class Patient implements Serializable {
         this.sex = builder.sex;
         this.age = builder.age;
         this.patientPassword = builder.patientPassword;
-
     }
 
 

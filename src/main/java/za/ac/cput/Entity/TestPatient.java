@@ -5,7 +5,6 @@ import lombok.Getter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,9 +31,9 @@ public class TestPatient implements Serializable {
 
 
 
-
-    @OneToMany(mappedBy = "testPatient")
-    private List<Patient> patient;
+    @JoinColumn(name = "patient_id")
+    @OneToOne
+    private Patient patient;
     protected TestPatient(){
     }
 
@@ -43,7 +42,7 @@ public class TestPatient implements Serializable {
     private TestPatient(Builder builder) {
         this.testID = builder.testID;
         this.testName = builder.testName;
-
+        this.patient = builder.patient;
     }
 
 

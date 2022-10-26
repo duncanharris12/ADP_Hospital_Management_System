@@ -1,10 +1,4 @@
-package za.ac.cput.View;
-
-import com.google.gson.Gson;
-import okhttp3.*;
-import za.ac.cput.Entity.Patient;
-import za.ac.cput.Entity.TestPatient;
-import za.ac.cput.Factory.TestPatientFactory;
+package za.ac.cput.Views;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,11 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static za.ac.cput.View.OkHttp.storeTest;
+import static za.ac.cput.Views.OkHttp.storeTest;
 
 public class TestPatients extends JDialog implements ActionListener {
-    public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
-    private static OkHttpClient client = new OkHttpClient();
+
 
     private JPanel TestPanel;
     private JTextField txtTestID;
@@ -42,6 +35,7 @@ public class TestPatients extends JDialog implements ActionListener {
     private void registerPatient() {
         try {
             String testID = txtTestID.getText();
+            String patientID = txtPatientID_3.getText();
             //String patientID = txtPatientID_3.getText();
             String testName;
 
@@ -64,9 +58,9 @@ public class TestPatients extends JDialog implements ActionListener {
                 storeTest(txtTestID.getText(),testName);
                 JOptionPane.showMessageDialog(null,"Test successfully added");
 
-                JOptionPane.showMessageDialog(null,"Error- Test could not be added");
+
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                JOptionPane.showMessageDialog(null,"Error- Test could not be added");
             }
         }
 
