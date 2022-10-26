@@ -11,6 +11,7 @@ import za.ac.cput.Entity.Administration;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,20 +27,22 @@ public class ViewAdmin  extends JFrame
     private ArrayList<Administration> rows;
     private JTable tblAdmin;
 
-    private DefaultTableModel dm;
+    private JPanel pnlCenter;
 
+    private DefaultTableModel dm;
+    //
     public ViewAdmin()
     {
         super("View Admins");
         rows = new ArrayList<>();
-        dm = new DefaultTableModel(col, 0);
+        dm = new DefaultTableModel(col,0);
         tblAdmin = new JTable(dm);
+        pnlCenter = new JPanel();
     }
 
     public void setGUI()
     {
-        add(tblAdmin);
-
+        add(new JScrollPane(tblAdmin));
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
