@@ -27,7 +27,7 @@ class ReceptionistTypeControllerTest {
     void setUp() {
         assertNotNull(controller);
         this.receptionist = ReceptionistFactory.createReceptionist(
-                "Jake", "Davina", "12332", 716172619);
+                "Jake", "Davina",  716172619);
         String url = baseURL;
     }
 

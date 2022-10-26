@@ -3,6 +3,7 @@ package za.ac.cput.Controllers;
    Controller Class: ReceptionistTypeController(220021333)
    Author: Davin Shaun Carstens
 */
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import za.ac.cput.Entity.Receptionist;
 import za.ac.cput.Service.Impl.ReceptionistServiceImpl;
+
 import javax.validation.Valid;
 
 @RestController

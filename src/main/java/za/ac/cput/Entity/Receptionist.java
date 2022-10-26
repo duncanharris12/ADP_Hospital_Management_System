@@ -18,18 +18,18 @@ public class Receptionist implements Serializable
     @Column(name = "receptionist_id")
     private String receptionistID;
     @NotNull
-    private String receptionistName;
+    private String receptionistUserName;
     @NotNull
     private String receptionistPassword;
     @NotNull
     private long receptionistTelephoneNumber;
-    protected Receptionist() {
+    public Receptionist() {// CHANGED IT TO PUBLIC FOR GUI, CHANGE TO PROTECTED IF YOU RUN INTO ISSUES
     }
 
     private Receptionist(Builder builder)
     {
         this.receptionistID = builder.receptionistID;
-        this.receptionistName = builder.receptionistName;
+        this.receptionistUserName = builder.receptionistUserName;
         this.receptionistPassword = builder.receptionistPassword;
         this.receptionistTelephoneNumber = builder.receptionistTelephoneNumber;
     }
@@ -39,9 +39,9 @@ public class Receptionist implements Serializable
         return receptionistID;
     }
 
-    public String getReceptionistName()
+    public String getReceptionistUserName()
     {
-        return receptionistName;
+        return receptionistUserName;
     }
 
     public String getReceptionistPassword()
@@ -59,7 +59,7 @@ public class Receptionist implements Serializable
     {
         return "Receptionist{" +
                 "receptionistID=" + receptionistID +
-                ", receptionistName='" + receptionistName + '\'' +
+                ", receptionistName='" + receptionistUserName + '\'' +
                 ", receptionistPassword='" + receptionistPassword + '\'' +
                 ", receptionistTelephoneNumber=" + receptionistTelephoneNumber +
                 '}';
@@ -68,7 +68,7 @@ public class Receptionist implements Serializable
     public static class Builder
     {
         private String receptionistID;
-        private String receptionistName;
+        private String receptionistUserName;
         private String receptionistPassword;
         private long receptionistTelephoneNumber;
 
@@ -77,8 +77,8 @@ public class Receptionist implements Serializable
             return this;
         }
 
-        public Builder setReceptionistName(String receptionistName) {
-            this.receptionistName = receptionistName;
+        public Builder setReceptionistUserName(String receptionistUserName) {
+            this.receptionistUserName = receptionistUserName;
             return this;
         }
 
@@ -95,7 +95,7 @@ public class Receptionist implements Serializable
         public Builder copy(Receptionist receptionist)
         {
             this.receptionistID = receptionist.receptionistID;
-            this.receptionistName = receptionist.receptionistName;
+            this.receptionistUserName = receptionist.receptionistUserName;
             this.receptionistPassword = receptionist.receptionistPassword;
             this.receptionistTelephoneNumber = receptionist.receptionistTelephoneNumber;
             return this;
