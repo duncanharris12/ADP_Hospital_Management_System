@@ -38,7 +38,9 @@ public class Patient implements Serializable {
     @NotNull
     private String patientPassword;
 
-    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "test_patient_id")
     private TestPatient testPatient;
     protected Patient(){
     }
@@ -54,6 +56,7 @@ public class Patient implements Serializable {
         this.sex = builder.sex;
         this.age = builder.age;
         this.patientPassword = builder.patientPassword;
+
     }
 
 

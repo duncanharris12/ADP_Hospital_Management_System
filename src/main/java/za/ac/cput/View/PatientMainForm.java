@@ -1,14 +1,12 @@
 package za.ac.cput.View;
 
 
-import com.google.gson.Gson;
-import okhttp3.*;
 import za.ac.cput.Entity.Patient;
-
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +19,6 @@ public class PatientMainForm extends JDialog implements ActionListener, ChangeLi
 
     private JTabbedPane tabbedPane1;
     private JPanel MainPanel;
-    private  JTextArea tDetails;
     private JButton searchButton;
     private JButton bookButton;
     private JTextArea tAppointment;
@@ -42,6 +39,7 @@ public class PatientMainForm extends JDialog implements ActionListener, ChangeLi
     private JPanel appointmentPanel;
     private JPanel medicationPanel;
     private JPanel testReportPanel;
+    private JTable table1;
 
 
     public PatientMainForm(JFrame parent){
@@ -52,6 +50,8 @@ public class PatientMainForm extends JDialog implements ActionListener, ChangeLi
         setMinimumSize(new Dimension(800,474));
         setModal(true);
         setLocationRelativeTo(parent);
+
+        DefaultTableModel tableModel;
 
 
 
@@ -80,6 +80,7 @@ public class PatientMainForm extends JDialog implements ActionListener, ChangeLi
 
     }
 
+
     public void patientMain(){
         try{
             String patientID = txtPatientID_2.getText();
@@ -97,10 +98,13 @@ public class PatientMainForm extends JDialog implements ActionListener, ChangeLi
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == viewButton3) {
             try {
-                readById(txtPatientID_2.getText());
-                JOptionPane.showMessageDialog(null, "Patient found!");
+                if (readById(txtPatientID_2.getText()).equals(txtPatientID_2)){
+                    JOptionPane.showMessageDialog(null, "Patient found!");
+                }
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Error- Patient not found!");
+
+
+                JOptionPane.showMessageDialog(null,ex.getMessage());
             }
 
         } else if (e.getSource() == searchButton) {

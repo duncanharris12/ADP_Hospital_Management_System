@@ -15,7 +15,7 @@
           <grid row="0" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Corbel" size="48" style="1"/>
+          <font name="Bookshelf Symbol 7" size="24" style="1"/>
           <text value="Register"/>
         </properties>
       </component>
@@ -26,7 +26,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Patient ID"/>
         </properties>
       </component>
@@ -37,7 +37,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
         </properties>
       </component>
       <component id="ac95e" class="javax.swing.JLabel">
@@ -47,7 +47,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Name"/>
         </properties>
       </component>
@@ -58,7 +58,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value=""/>
         </properties>
       </component>
@@ -69,7 +69,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Phone number"/>
         </properties>
       </component>
@@ -80,7 +80,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
         </properties>
       </component>
       <component id="249db" class="javax.swing.JLabel">
@@ -90,7 +90,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Age"/>
         </properties>
       </component>
@@ -101,7 +101,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
         </properties>
       </component>
       <component id="bf44d" class="javax.swing.JLabel">
@@ -111,7 +111,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Gender"/>
         </properties>
       </component>
@@ -122,7 +122,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Address"/>
         </properties>
       </component>
@@ -135,7 +135,7 @@
         <properties>
           <editable value="true"/>
           <enabled value="true"/>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value=""/>
         </properties>
       </component>
@@ -146,7 +146,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Password"/>
         </properties>
       </component>
@@ -157,7 +157,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value=""/>
         </properties>
       </component>
@@ -168,7 +168,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Confirm Password"/>
         </properties>
       </component>
@@ -179,7 +179,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
         </properties>
       </component>
       <component id="1e201" class="javax.swing.JButton" binding="btnRegister">
@@ -187,7 +187,7 @@
           <grid row="10" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="16" style="1"/>
           <text value="Register"/>
         </properties>
       </component>
@@ -199,7 +199,7 @@
         </constraints>
         <properties>
           <background color="-876139"/>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Male"/>
         </properties>
       </component>
@@ -209,7 +209,7 @@
         </constraints>
         <properties>
           <background color="-876139"/>
-          <font name="Corbel" size="18" style="1"/>
+          <font name="Bookshelf Symbol 7" size="14" style="0"/>
           <text value="Female"/>
         </properties>
       </component>
