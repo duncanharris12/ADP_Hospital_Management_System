@@ -88,7 +88,9 @@ public class DeleteDoctor extends JFrame implements ActionListener
         }
         else if(e.getSource() == btnCancel)
         {
-            System.exit(0);
+            dispose();
+            AdminMain am = new AdminMain();
+            am.setGUI();
         }
     }
 
@@ -196,7 +198,5 @@ public class DeleteDoctor extends JFrame implements ActionListener
         }
         boxAdminID.setModel(dm);
     }
-    public static void main(String[] args) {
-        new DeleteDoctor().setGUI();
-    }
+
 }

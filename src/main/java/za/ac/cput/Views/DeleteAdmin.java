@@ -1,5 +1,5 @@
 package za.ac.cput.Views;
-
+//Author: Duncan, 220110530
 import com.google.gson.Gson;
 import okhttp3.*;
 import org.json.JSONArray;
@@ -86,7 +86,9 @@ public class DeleteAdmin extends JFrame implements ActionListener
         }
         else if(e.getSource() == btnCancel)
         {
-            System.exit(0);
+            dispose();
+            AdminMain am = new AdminMain();
+            am.setGUI();
         }
     }
 
@@ -194,8 +196,5 @@ public class DeleteAdmin extends JFrame implements ActionListener
             dm.addElement(adminIDs.get(i));
         }
         boxAdminID.setModel(dm);
-    }
-    public static void main(String[] args) {
-        new DeleteAdmin().setGUI();
     }
 }

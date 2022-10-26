@@ -127,7 +127,9 @@ public class CreateDepartment extends JFrame implements ActionListener
         }
         else if(e.getSource()==btnCancel)
         {
-            System.exit(0);
+            dispose();
+            AdminMain am = new AdminMain();
+            am.setGUI();
         }
     }
 
@@ -168,9 +170,6 @@ public class CreateDepartment extends JFrame implements ActionListener
         }
     }
 
-    public static void main(String[] args) {
-        new CreateDepartment().setGui();
-    }
 }
 
 

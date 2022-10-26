@@ -8,8 +8,8 @@ import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import za.ac.cput.Entity.Administration;
-import za.ac.cput.Entity.Doctor;
-
+import za.ac.cput.Entity.MedicalRecords;
+//Author: Duncan, 220110530
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -18,16 +18,16 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ViewDoctor extends JFrame implements ActionListener
+public class ViewMedicalRecords extends JFrame implements ActionListener
 {
     public static final MediaType JSON
             = MediaType.get("application/JSON; charset=utf-8");
 
     private static OkHttpClient client = new OkHttpClient();
 
-    private String col[] = {"Doctor ID", "Name", "Password", "Department", "Specialty"};
-    private ArrayList<Doctor> rows;
-    private JTable tblAdmin;
+    private String col[] = {"Record ID", "Test ID"};
+    private ArrayList<MedicalRecords> rows;
+    private JTable tblRecords;
 
     private JPanel pnlCenter;
     private JPanel pnlSouth;
@@ -35,12 +35,12 @@ public class ViewDoctor extends JFrame implements ActionListener
 
     private DefaultTableModel dm;
     //
-    public ViewDoctor()
+    public ViewMedicalRecords()
     {
-        super("View Doctors");
+        super("View Medical Records");
         rows = new ArrayList<>();
         dm = new DefaultTableModel(col,0);
-        tblAdmin = new JTable(dm);
+        tblRecords = new JTable(dm);
         pnlCenter = new JPanel();
         pnlSouth = new JPanel();
         btnBack = new JButton("Back");
@@ -48,7 +48,7 @@ public class ViewDoctor extends JFrame implements ActionListener
 
     public void setGUI()
     {
-        add(new JScrollPane(tblAdmin));
+        add(new JScrollPane(tblRecords));
         add(pnlSouth, BorderLayout.SOUTH);
         pnlSouth.add(btnBack);
         btnBack.addActionListener(this);
@@ -65,8 +65,7 @@ public class ViewDoctor extends JFrame implements ActionListener
         if(e.getSource() == btnBack)
         {
             dispose();
-            AdminMain am = new AdminMain();
-            am.setGUI();
+            PatientMainScreen psm = new PatientMainScreen( null);
         }
     }
 
@@ -86,15 +85,15 @@ public class ViewDoctor extends JFrame implements ActionListener
         try
         {
             final String URL
-                    = "http://localhost:8080/hospital-management/doctor/getAll/doctor";
+                    = "http://localhost:8080//hospital-management/medicalRecords/getAll/medicalRecords";
             String responseBody = run(URL);
             JSONArray adminArray = new JSONArray(responseBody);
             for(int i=0; i < adminArray.length(); i++)
             {
                 JSONObject adminObject = adminArray.getJSONObject(i);
                 Gson g = new Gson();
-                Doctor doctor = g.fromJson(adminObject.toString(), Doctor.class);
-                rows.add(doctor);
+               MedicalRecords med = g.fromJson(adminObject.toString(), MedicalRecords.class);
+                rows.add(med);
             }
 
         }
@@ -108,13 +107,10 @@ public class ViewDoctor extends JFrame implements ActionListener
     {
         for(int i=0; i < rows.size(); i++)
         {
-            String id = rows.get(i).getDoctorID();
-            String name = rows.get(i).getDoctorName();
-            String password = rows.get(i).getDoctorPassword();
-            String department = String.valueOf(rows.get(i).getDepartment());
-            String specialty = rows.get(i).getSpecialty();
+            String id = rows.get(i).getRecordID();
+            String name = rows.get(i).getTestResults().getTestResultsID();
 
-            Object[] data = {id, name, password, department, specialty};
+            Object[] data = {id, name};
 
             dm.addRow(data);
         }

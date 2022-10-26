@@ -33,7 +33,7 @@ public class ReceptionistTypeController {
         return ResponseEntity.ok(save);
     }
 
-    @GetMapping("read")
+    @GetMapping("read/{id}")
     public ResponseEntity<Receptionist> read(@PathVariable String id){
         log.info("Read request: {}", id);
         try{
@@ -44,7 +44,7 @@ public class ReceptionistTypeController {
         }
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Receptionist> delete(@PathVariable String id){
         log.info("Delete Request: {}", id);
         this.receptionistService.delete(id);

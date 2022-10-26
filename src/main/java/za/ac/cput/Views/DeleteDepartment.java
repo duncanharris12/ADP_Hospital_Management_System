@@ -88,7 +88,9 @@ public class DeleteDepartment extends JFrame implements ActionListener
         }
         else if(e.getSource() == btnCancel)
         {
-            System.exit(0);
+            dispose();
+            AdminMain am = new AdminMain();
+            am.setGUI();
         }
     }
 
@@ -196,8 +198,5 @@ public class DeleteDepartment extends JFrame implements ActionListener
             dm.addElement(departmentIDs.get(i));
         }
         boxAdminID.setModel(dm);
-    }
-    public static void main(String[] args) {
-        new DeleteDepartment().setGUI();
     }
 }
