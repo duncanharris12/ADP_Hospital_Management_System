@@ -10,7 +10,7 @@ class ReceptionistFactoryTest
     @Test
     void createReceptionist()
     {
-        Receptionist receptionist = ReceptionistFactory.createReceptionist("Davin", "Valory", "password", 1232242);
+        Receptionist receptionist = ReceptionistFactory.createReceptionist("Davin", "Valory", 1232242);
         assertNotNull(receptionist);
         System.out.println(receptionist);
     }
