@@ -1,9 +1,6 @@
 package za.ac.cput.Controllers;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -42,10 +39,11 @@ public class TestPatientControllerTest {
     void setUp() {
         assertNotNull(testPatientController);
         this.testPatient = TestPatientFactory.createTestPatient("THM786","Blood DNA", patient);
-        this.urlBase = "http://localhost:" + this.portNumber + "/test-patient/testPatient/";
+        this.urlBase = "http://localhost:" + this.portNumber + "/hospital-management/testPatient/";
     }
 
     @Test
+    @Order(1)
     void save() {
         String url = urlBase + "save_testPatient";
         System.out.println(url);
@@ -57,29 +55,32 @@ public class TestPatientControllerTest {
     }
 
     @Test
+    @Order(2)
     void b_read() {
         String url = urlBase + "readTestPatient/" + testPatient.getTestID();
         System.out.println(url);
         ResponseEntity<TestPatient> testPatientResponseEntity = this.restTemplate.getForEntity(url, TestPatient.class);
         System.out.println(testPatientResponseEntity);
         assertAll(()->assertNotNull(testPatientResponseEntity),
-                () -> assertEquals(HttpStatus.OK,testPatientResponseEntity.getStatusCode()),
-                ()-> assertEquals(HttpStatus.OK,testPatientResponseEntity.getBody()));
+                () -> assertEquals(HttpStatus.OK,testPatientResponseEntity.getStatusCode()));
+                //()-> assertEquals(HttpStatus.OK,testPatientResponseEntity.getBody()));
 
     }
 
     @Test
+    @Order(4)
     void d_delete() {
         String url = urlBase + "deleteTestPatient/" + testPatient.getTestID();
         this.restTemplate.delete(url);
-        assertAll(()->assertSame("1",testPatient.getTestID()),
-                ()->assertNotNull(testPatient.getTestName()));
+        //assertAll(()->assertSame("1",testPatient.getTestID()),
+                assertNotNull(testPatient.getTestName());
         System.out.println("Delete successful!");
 
 
     }
 
     @Test
+    @Order(3)
     void c_getAll() {
         String url = urlBase + "getTestPatients";
 

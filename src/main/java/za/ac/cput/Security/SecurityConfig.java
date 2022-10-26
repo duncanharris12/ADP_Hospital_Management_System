@@ -79,6 +79,18 @@ public class SecurityConfig  {
                 .antMatchers(HttpMethod.DELETE,"/laboratory/deleteLaboratory/").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/laboratory/getAllLaboratory").hasRole("USER")
 
+                //medication authentication
+                .antMatchers(HttpMethod.POST,"/medication/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/medication/readMedication/").hasRole("USER")
+                .antMatchers(HttpMethod.DELETE,"/medication/deleteMedication/").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/medication/getAll").hasRole("USER")
+
+                //testResults authentication
+                .antMatchers(HttpMethod.POST,"/testResults/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/testResults/readTestResults/").hasRole("USER")
+                .antMatchers(HttpMethod.DELETE,"/testResults/deleteTestResults/").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/testResults/getAll").hasRole("USER")
+
 
                 .and()
                 .csrf().disable()

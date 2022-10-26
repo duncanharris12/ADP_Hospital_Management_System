@@ -6,60 +6,48 @@
 
 package za.ac.cput.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Getter;
 
+import javax.persistence.*;
+
+@Getter
 @Entity
 public class TestResults {
 
-    private String patientName;
-    private String patientSex;
-
     @Id
-    private String testID;
+    @Column(name = "test_results_id")
+    private String testResultsID;
+    @JoinColumn(name="patient_id")
+    @OneToOne
+    private Patient patient;
+
+    @JoinColumn(name="test_id")
+    @OneToOne
+    private TestPatient testPatient;
     private String testDate;
     private String testDescription;
 
     protected TestResults(){}
 
     private TestResults(Builder builder) {
-        this.patientName = builder.patientName;
-        this.patientSex = builder.patientSex;
-        this.testID = builder.testID;
+        this.testResultsID = builder.testResultsID;
+        this.patient = builder.patient;
+        this.testPatient = builder.testPatient;
         this.testDate = builder.testDate;
         this.testDescription = builder.testDescription;
     }
 
-    public String getPatientName() {
-        return patientName;
+
+
+    public void setTestResultsID(String testResultsID) {
+        this.testResultsID = testResultsID;
+    }
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
-    public String getPatientSex() {
-        return patientSex;
-    }
-
-    public String getTestID() {
-        return testID;
-    }
-
-    public String getTestDate() {
-        return testDate;
-    }
-
-    public String getTestDescription() {
-        return testDescription;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
-
-    public void setPatientSex(String patientSex) {
-        this.patientSex = patientSex;
-    }
-
-    public void setTestID(String testID) {
-        this.testID = testID;
+    public void setTestPatient(TestPatient testPatient) {
+        this.testPatient = testPatient;
     }
 
     public void setTestDate(String testDate) {
@@ -73,33 +61,34 @@ public class TestResults {
     @Override
     public String toString() {
         return "TestResults{" +
-                "patientName='" + patientName + '\'' +
-                ", patientSex='" + patientSex + '\'' +
-                ", testID='" + testID + '\'' +
+                "testResultsID'" + testResultsID + '\''+
+                "patient='" + patient + '\'' +
+                ", testPatient='" + testPatient + '\'' +
                 ", testDate='" + testDate + '\'' +
                 ", testDescription='" + testDescription + '\'' +
                 '}';
     }
 
     public static class Builder {
-        private String patientName;
-        private String patientSex;
-        private String testID;
+
+        private String testResultsID;
+        private Patient patient;
+
+        private TestPatient testPatient;
         private String testDate;
         private String testDescription;
 
-        public Builder setPatientName(String patientName) {
-            this.patientName = patientName;
+            public Builder setPatient(Patient patient) {
+            this.patient = patient;
+            return this;
+        }
+        public Builder setTestResultsID(String testResultsID) {
+            this.testResultsID = testResultsID;
             return this;
         }
 
-        public Builder setPatientSex(String patientSex) {
-            this.patientSex = patientSex;
-            return this;
-        }
-
-        public Builder setTestID(String testID) {
-            this.testID = testID;
+        public Builder setTestPatient(TestPatient testPatient) {
+            this.testPatient = testPatient;
             return this;
         }
 
@@ -114,8 +103,9 @@ public class TestResults {
         }
 
         public Builder copy(TestResults testresults) {
-            this.patientName = testresults.patientName;
-            this.patientSex = testresults.patientSex;
+            this.testResultsID = testResultsID;
+            this.patient = testresults.patient;
+            this.testPatient = testPatient;
             this.testDate = testresults.testDate;
             this.testDescription = testresults.testDescription;
             return this;

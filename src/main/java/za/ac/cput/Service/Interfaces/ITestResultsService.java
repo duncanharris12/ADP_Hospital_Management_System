@@ -9,9 +9,10 @@ import za.ac.cput.Entity.TestResults;
 import za.ac.cput.Service.IService;
 
 import java.util.List;
+import java.util.Set;
 
 
 public interface ITestResultsService extends IService<TestResults, String> {
-    List<TestResults> getTestResults();
+    Set<TestResults> getAll();
 
 }

@@ -22,7 +22,7 @@ public class TestPatient implements Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "test_id")
     private String testID;
 
@@ -30,8 +30,9 @@ public class TestPatient implements Serializable {
     private String testName;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+
     @JoinColumn(name = "patient_id")
+    @OneToOne
     private Patient patient;
     protected TestPatient(){
     }

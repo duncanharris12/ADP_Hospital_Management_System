@@ -10,7 +10,11 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import za.ac.cput.Entity.Patient;
+import za.ac.cput.Entity.TestPatient;
 import za.ac.cput.Entity.TestResults;
+import za.ac.cput.Factory.PatientFactory;
+import za.ac.cput.Factory.TestPatientFactory;
 import za.ac.cput.Factory.TestResultsFactory;
 
 import java.util.Arrays;
@@ -28,13 +32,18 @@ public class TestResultsControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
     private TestResults testResults;
+    private Patient patient;
+    private TestPatient testPatient;
     private String urlBase;
 
     @BeforeEach
     void setUp() {
         assertNotNull(testResultsController);
-        this.testResults = TestResultsFactory.createTestResults("Anga Funo","Male","121298","12 December 2022","HIV test results");
+        this.patient = PatientFactory.createPatient("PHM346" ,"Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");
+        this.testPatient = TestPatientFactory.createTestPatient("122001","test",patient);
+        this.testResults = TestResultsFactory.createTestResults("855",patient,testPatient,"12 December 2022","HIV test results");
         this.urlBase = "http://localhost:" + this.portNumber + "/hospital-management/testResults/";
+
     }
 
     @Test
@@ -52,7 +61,7 @@ public class TestResultsControllerTest {
 
     @Test
     void b_read() {
-        String url = urlBase + "readTestResults/" + testResults.getTestID();
+        String url = urlBase + "readTestResults/" + testResults.getTestResultsID();
         System.out.println(url);
 
         ResponseEntity<TestResults> testResultsResponseEntity = this.restTemplate.getForEntity(url, TestResults.class);

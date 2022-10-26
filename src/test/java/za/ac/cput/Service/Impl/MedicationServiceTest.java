@@ -4,6 +4,8 @@ package za.ac.cput.Service.Impl;
 import org.junit.jupiter.api.*;
 import za.ac.cput.Entity.*;
 import za.ac.cput.Factory.MedicationFactory;
+import za.ac.cput.Factory.PatientFactory;
+import za.ac.cput.Factory.TestPatientFactory;
 import za.ac.cput.Factory.TestResultsFactory;
 import za.ac.cput.Repository.IMedicationRepository;
 
@@ -20,12 +22,16 @@ public class MedicationServiceTest {
 
     private Medication medication;
     private TestResults testResults;
+    private Patient patient;
+    private TestPatient testPatient;
 
 
     @BeforeEach
     void setUp(){
         //this.service = new MedicationServiceImpl(repository);
-        this.testResults = TestResultsFactory.createTestResults("Onnie","Female","4586","12 January 22","HIV test");
+        this.patient = PatientFactory.createPatient("PHM346" ,"Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");
+        this.testPatient = TestPatientFactory.createTestPatient("122001","test",patient);
+        this.testResults = TestResultsFactory.createTestResults("855",patient,testPatient,"12 December 2022","HIV test results");
         this.medication = MedicationFactory.createMedication("4586","ARV",10f,31);
         assertNotNull(medication);
     }

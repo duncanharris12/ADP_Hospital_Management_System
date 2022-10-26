@@ -6,19 +6,22 @@
 
 package za.ac.cput.Factory;
 
+import za.ac.cput.Entity.Patient;
+import za.ac.cput.Entity.TestPatient;
 import za.ac.cput.Entity.TestResults;
 import za.ac.cput.util.Helper;
 
 
 public class TestResultsFactory {
 
-    public static TestResults createTestResults(String patientName,String patientSex, String testID, String testDate, String testDescription)
+    public static TestResults createTestResults(String testResultsID, Patient patient, TestPatient testPatient, String testDate, String testDescription)
     {
-        testID = Helper.generateTestID();
+        //testID = Helper.generateTestID();
+
         TestResults testresults = new TestResults.Builder()
-                .setPatientName(patientName)
-                .setPatientSex(patientSex)
-                .setTestID(testID)
+                .setTestResultsID(testResultsID)
+                .setPatient(patient)
+                .setTestPatient(testPatient)
                 .setTestDate(testDate)
                 .setTestDescription(testDescription)
                 .build();

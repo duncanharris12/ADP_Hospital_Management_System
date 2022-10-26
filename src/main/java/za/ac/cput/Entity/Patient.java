@@ -22,7 +22,7 @@ public class Patient implements Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name= "patient_id")
     private String patientID;
     @NotNull

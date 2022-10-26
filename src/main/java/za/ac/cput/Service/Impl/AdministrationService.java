@@ -52,4 +52,5 @@ public class AdministrationService implements IAdministrationService
     {
         return this.repository.findAll().stream().collect(Collectors.toSet());
     }
+
 }
