@@ -52,7 +52,7 @@ public class PatientController {
         }
     }
 
-    @DeleteMapping("deletePatient/{id}")
+    @DeleteMapping("deletePatient/{patientID}")
     public ResponseEntity<Patient> delete (@PathVariable String patientID){
         log.info("Delete request:", patientID);
         this.patientService.delete(patientID);
