@@ -1,5 +1,6 @@
 package za.ac.cput.util;
 
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -63,7 +64,11 @@ public class Helper
     //Generating primary key for administration class
     public static String generateAdministrationID()
     {
-        return UUID.randomUUID().toString();
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
     }
     
     //Generating primary key for department class

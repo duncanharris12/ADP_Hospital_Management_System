@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import za.ac.cput.Entity.Medication;
+import za.ac.cput.Entity.Patient;
 import za.ac.cput.Service.Impl.MedicationServiceImpl;
 
 import javax.validation.Valid;
@@ -19,45 +20,51 @@ import java.util.Set;
 @Slf4j
 public class MedicationController {
 
-    private MedicationServiceImpl medicationServiceImpl;
+    private final MedicationServiceImpl medicationServiceImpl;
 
     @Autowired
-    MedicationController(MedicationServiceImpl medicationServiceImpl)
+    public MedicationController(MedicationServiceImpl medicationServiceImpl)
     {
         this.medicationServiceImpl = medicationServiceImpl;
     }
 
-    @PostMapping("save/medication")
-    public ResponseEntity<Medication> save(@Valid @RequestBody Medication medication)
-    {
-        log.info("Save Request: {}", medication);
-        Medication save = this.medicationServiceImpl.save(medication);
-        return ResponseEntity.ok(save);
+    @PostMapping("save")
+    public ResponseEntity<Medication> save(@Valid @RequestBody Medication saveMedication) {
+        log.info("Save request: {}", saveMedication);
+        try {
+            Medication medication = this.medicationServiceImpl.save(saveMedication);
+            return ResponseEntity.ok(medication);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+
+        }
     }
 
-    @GetMapping("getMedication/{id}")
-    public ResponseEntity<Medication> read(@PathVariable String id)
-    {
-        log.info("Read Request: {}", id);
-        try
-        {
-            Medication read = this.medicationServiceImpl.read(id);
+    @GetMapping("readMedication/{medicationID}")
+    public ResponseEntity<Medication> read (@Valid @PathVariable String medicationID){
+
+        log.info("Read request: {}", medicationID);
+        try {
+            Medication read = this.medicationServiceImpl.read(medicationID);
             return ResponseEntity.ok(read);
-        }
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("deleteMedication/{id}")
-    public ResponseEntity<Medication> delete(@PathVariable String id)
-    {
-        log.info("Delete Request: {}", id);
-        this.medicationServiceImpl.delete(id);
+    public ResponseEntity<Medication> delete (@PathVariable String medicationID){
+        log.info("Delete request:", medicationID);
+        this.medicationServiceImpl.delete(medicationID);
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("all")
+    public ResponseEntity<Set<Medication>> getAll() {
+        Set<Medication> medicationSet = this.medicationServiceImpl.getAll();
+        return ResponseEntity.ok(medicationSet);
+    }
+}
  /*   @GetMapping("getAll/medication")
     public ResponseEntity<Set<Medication>> getAll()
     {
@@ -66,7 +73,7 @@ public class MedicationController {
     }
 
   */
-}
+
 
 
 

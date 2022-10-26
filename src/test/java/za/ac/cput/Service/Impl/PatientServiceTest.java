@@ -37,6 +37,7 @@ class PatientServiceTest {
 
 
     @Test
+    @Order(1)
     void a_save() {
         System.out.println("Created: ");
         Patient created= service.save(patient1);
@@ -66,6 +67,7 @@ class PatientServiceTest {
 
 
     @Test
+    @Order(2)
     void b_read() {
         Patient read = service.read(patient4.getPatientID());
         assertNotNull(read.getPatientID(), patient4.getPatientID());
@@ -79,6 +81,7 @@ class PatientServiceTest {
     }*/
 
     @Test
+    @Order(4)
     void d_delete() {
         service.delete(patient3.getPatientID());
         assertNotNull(patient3);
@@ -86,6 +89,7 @@ class PatientServiceTest {
     }
 
     @Test
+    @Order(3)
     void c_getPatients(){
         System.out.println("Get all patients: ");
         System.out.println(service.getAll());

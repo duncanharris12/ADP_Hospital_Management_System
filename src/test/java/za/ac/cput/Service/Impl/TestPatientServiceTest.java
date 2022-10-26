@@ -31,31 +31,34 @@ class TestPatientServiceTest {
     private Patient patient;
     //private final Patient patient = PatientFactory.createPatient( "PHM334","Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");;
     private final TestPatient testPatient = TestPatientFactory.createTestPatient("THM878","Drug test", patient);
-    @Order(1)
+
     @Test
+    @Order(1)
     void save() {
         TestPatient save  = service.save(this.testPatient);
         assertEquals(this.testPatient, save);
     }
 
-    @Order(2)
+
     @Test
+    @Order(2)
     void read() {
         TestPatient read = service.read(testPatient.getTestID());
         assertNotNull(read);
     }
 
-    @Order(4)
+
     @Test
+    @Order(4)
     void delete() {
         service.delete(testPatient.getTestID());
         assertNotNull(testPatient);
         System.out.println("Deleted: " + testPatient);
     }
-     @Order(3)
+
     @Test
+    @Order(3)
     void getTestPatients(){
         System.out.println("Get all testPatients: ");
-        System.out.println(service.getTestPatients());
+        System.out.println(service.getAll());
     }
-}

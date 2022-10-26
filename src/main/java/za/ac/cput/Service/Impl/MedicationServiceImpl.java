@@ -36,7 +36,7 @@ public class MedicationServiceImpl implements IMedicationService {
 
 
     @Override
-    public List<Medication> getMedication() {
-        return null;
+    public Set<Medication> getAll() {
+        return this.repository.findAll().stream().collect(Collectors.toSet());
     }
 }

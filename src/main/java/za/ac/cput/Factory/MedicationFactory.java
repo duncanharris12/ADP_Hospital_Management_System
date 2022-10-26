@@ -13,7 +13,7 @@ public class MedicationFactory {
 
     public static Medication createMedication(String medicationID, String medicationName, float medicationPrice, int medicationQuantity)
     {
-        medicationID = Helper.generateMedicationID();
+        //medicationID = Helper.generateMedicationID();
         Medication medication = new Medication.Builder()
                 .setMedicationID(medicationID)
                 .setMedicationName(medicationName)
