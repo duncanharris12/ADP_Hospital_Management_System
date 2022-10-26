@@ -43,6 +43,7 @@ public class ViewTestPatient extends JFrame implements ActionListener
         rows = new ArrayList<>();
         dm = new DefaultTableModel(col,0);
         btnBack = new JButton("Back");
+        pnlSouth = new JPanel();
         tblTestPatient = new JTable(dm);
         pnlCenter = new JPanel();
     }
@@ -56,9 +57,10 @@ public class ViewTestPatient extends JFrame implements ActionListener
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        btnBack.addActionListener(this);
         getAll();
         populateTable();
+
+        btnBack.addActionListener(this);
     }
 
     private static String run(final String url) throws IOException
@@ -101,10 +103,10 @@ public class ViewTestPatient extends JFrame implements ActionListener
         {
             String id = rows.get(i).getTestID();
             String name = rows.get(i).getTestName();
-            String patientId= rows.get(i).getPatient().getPatientID();
+            //String patientId= rows.get(i).getPatient().getPatientID();
 
 
-            Object[] data = {id, name, patientId };
+            Object[] data = {id, name };//patientId };
 
             dm.addRow(data);
         }
@@ -119,6 +121,7 @@ public class ViewTestPatient extends JFrame implements ActionListener
         if(e.getSource() == btnBack){
             new TestPatientMain().setGUI();
             new ViewTestPatient().dispose();
+
         }
     }
 }
