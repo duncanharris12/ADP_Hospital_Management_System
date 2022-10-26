@@ -91,6 +91,11 @@ public class SecurityConfig  {
                 .antMatchers(HttpMethod.DELETE,"/testResults/deleteTestResults/").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/testResults/getAll").hasRole("USER")
 
+                //Receptionist authentication
+                .antMatchers(HttpMethod.POST,"/receptionist_type/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/receptionist_type/read").hasRole("USER")
+                .antMatchers(HttpMethod.DELETE,"/receptionist_type/delete").hasRole("ADMIN")
+
 
                 .and()
                 .csrf().disable()

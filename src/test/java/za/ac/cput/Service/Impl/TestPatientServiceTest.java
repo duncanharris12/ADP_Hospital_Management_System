@@ -26,16 +26,17 @@ Date: 14 August 2022
 class TestPatientServiceTest {
 
 
-    @Autowired private TestPatientService service;
+    @Autowired
+    private TestPatientService service;
 
     private Patient patient;
     //private final Patient patient = PatientFactory.createPatient( "PHM334","Babsie Ndongeni", "67 Nomyayi Street", +785648934,"Female",22,"password");;
-    private final TestPatient testPatient = TestPatientFactory.createTestPatient("THM878","Drug test", patient);
+    private final TestPatient testPatient = TestPatientFactory.createTestPatient("THM878", "Drug test", patient);
 
     @Test
     @Order(1)
     void save() {
-        TestPatient save  = service.save(this.testPatient);
+        TestPatient save = service.save(this.testPatient);
         assertEquals(this.testPatient, save);
     }
 
@@ -58,7 +59,8 @@ class TestPatientServiceTest {
 
     @Test
     @Order(3)
-    void getTestPatients(){
+    void getTestPatients() {
         System.out.println("Get all testPatients: ");
         System.out.println(service.getAll());
-    }
+    }}
+}

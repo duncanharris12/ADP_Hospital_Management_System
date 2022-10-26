@@ -3,26 +3,33 @@ package za.ac.cput.Views;
 import com.google.gson.Gson;
 import okhttp3.*;
 import za.ac.cput.Entity.Administration;
+import za.ac.cput.Entity.Department;
 import za.ac.cput.Factory.AdministrationFactory;
+import za.ac.cput.Factory.DepartmentFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class CreateAdmin extends JFrame implements ActionListener
+public class CreateDepartment extends JFrame implements ActionListener
 {
     public static final MediaType JSON
             = MediaType.get("application/JSON; charset=utf-8");
 
     private static OkHttpClient client = new OkHttpClient();
 
+    private GridLayout centerLayout = new GridLayout(2,2);
     private Font  f1;
-    private JLabel lblAdminName;
-    private JTextField txtAdminName;
+    private JLabel lblDepartmentId;
+    private JTextField txtDepartmentId;
 
-    private JLabel lblAdminPassword;
-    private JPasswordField txtAdminPassword;
+    private JLabel lblDepartmentName;
+    private JTextField txtDepartmentName;
+
+    private JLabel lblDepartmentSize;
+    private JTextField txtDepartmentSize;
 
     private JButton btnSave;
     private JButton btnCancel;
@@ -30,15 +37,18 @@ public class CreateAdmin extends JFrame implements ActionListener
     private JPanel pnlCenter;
     private JPanel pnlSouth;
 
-    public CreateAdmin()
+    public CreateDepartment()
     {
-        super("Create Administration Account");
+        super("Create Administration Account :");
 
-        lblAdminName = new JLabel("Admin Name");
-        txtAdminName = new JTextField();
+        lblDepartmentId = new JLabel("Department Id :");
+        txtDepartmentId = new JTextField();
 
-        lblAdminPassword = new JLabel("Admin Password");
-        txtAdminPassword = new JPasswordField();
+        lblDepartmentName = new JLabel("Department Name :");
+        txtDepartmentName = new JTextField();
+
+        lblDepartmentSize = new JLabel("Department Size :");
+        txtDepartmentSize = new JTextField();
 
         btnSave = new JButton("Save");
         btnCancel = new JButton("Cancel");
@@ -63,27 +73,40 @@ public class CreateAdmin extends JFrame implements ActionListener
         c.weightx = 0.4;
         c.gridx = 0;
         c.gridy = 0;
-        pnlCenter.add(lblAdminName, c);
+        pnlCenter.add(lblDepartmentId, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.6;
         c.gridx = 1;
         c.gridy = 0;
-        pnlCenter.add(txtAdminName, c);
-        txtAdminName.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        pnlCenter.add(txtDepartmentId, c);
+        txtDepartmentId.setBorder(BorderFactory.createEmptyBorder());
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.4;
         c.gridx = 0;
         c.gridy = 1;
-        pnlCenter.add(lblAdminPassword, c);
+        pnlCenter.add(lblDepartmentName, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.6;
         c.gridx = 1;
         c.gridy = 1;
-        pnlCenter.add(txtAdminPassword, c);
-        txtAdminPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        pnlCenter.add(txtDepartmentName, c);
+        txtDepartmentName.setBorder(BorderFactory.createEmptyBorder());
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.4;
+        c.gridx = 0;
+        c.gridy = 2;
+        pnlCenter.add(lblDepartmentSize, c);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.6;
+        c.gridx = 1;
+        c.gridy = 2;
+        pnlCenter.add(txtDepartmentSize, c);
+        txtDepartmentSize.setBorder(BorderFactory.createEmptyBorder());
 
         pnlSouth.setLayout(new GridLayout());
         pnlSouth.add(btnSave);
@@ -100,7 +123,7 @@ public class CreateAdmin extends JFrame implements ActionListener
     {
         if(e.getSource() == btnSave)
         {
-            store(txtAdminName.getText(), String.valueOf(txtAdminPassword.getPassword()));
+            store(txtDepartmentId.getText(), txtDepartmentName.getText(), Integer.parseInt(txtDepartmentSize.getText()));
         }
         else if(e.getSource()==btnCancel)
         {
@@ -108,23 +131,23 @@ public class CreateAdmin extends JFrame implements ActionListener
         }
     }
 
-    public void store(String adminName, String adminPassword)
+    public void store(String departmentId, String departmentName, int departmentSize)
     {
         try
         {
             final String URL
-                    ="http://localhost:8080/hospital-management/administration/save/admin";
-            Administration administration = AdministrationFactory.createAdministration(adminName,adminPassword);
+                    ="http://localhost:8080/hospital-management/department/save";
+            Department department = DepartmentFactory.createDepartment(departmentId,departmentName, departmentSize);
             Gson g = new Gson();
-            String jsonString = g.toJson(administration);
+            String jsonString = g.toJson(department);
             String request = post(URL, jsonString);
             if(request != null)
             {
-                JOptionPane.showMessageDialog(null, "Admin Saved");
+                JOptionPane.showMessageDialog(null, "Department Saved");
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Error- Admin not saved");
+                JOptionPane.showMessageDialog(null, "Error- Department not saved");
             }
         }
         catch(Exception e)
@@ -146,7 +169,7 @@ public class CreateAdmin extends JFrame implements ActionListener
     }
 
     public static void main(String[] args) {
-        new CreateAdmin().setGui();
+        new CreateDepartment().setGui();
     }
 }
 
