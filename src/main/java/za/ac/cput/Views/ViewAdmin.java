@@ -30,7 +30,7 @@ public class ViewAdmin  extends JFrame
     private JPanel pnlCenter;
 
     private DefaultTableModel dm;
-
+    //
     public ViewAdmin()
     {
         super("View Admins");
