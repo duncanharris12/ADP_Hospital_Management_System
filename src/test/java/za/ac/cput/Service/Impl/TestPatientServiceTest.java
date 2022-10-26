@@ -62,5 +62,5 @@ class TestPatientServiceTest {
     void getTestPatients() {
         System.out.println("Get all testPatients: ");
         System.out.println(service.getAll());
-    }
+    }}
 }
