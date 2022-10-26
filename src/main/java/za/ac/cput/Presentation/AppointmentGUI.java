@@ -70,7 +70,7 @@ public class AppointmentGUI extends JFrame implements ActionListener {
 
         lblDoctorID = new JLabel("Doctor ID: ");
         txtDoctorID = new JTextField(20);
-        lblError_DoctorID = new JLabel("Required"); // needs fixing
+        lblError_DoctorID = new JLabel("Required"); 
         lblError_DoctorID.setForeground(Color.red);
         lblError_DoctorID.setVisible(false);
 
