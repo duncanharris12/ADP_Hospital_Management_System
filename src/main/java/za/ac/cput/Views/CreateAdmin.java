@@ -17,7 +17,6 @@ public class CreateAdmin extends JFrame implements ActionListener
 
     private static OkHttpClient client = new OkHttpClient();
 
-    private GridLayout centerLayout = new GridLayout(2,2);
     private Font  f1;
     private JLabel lblAdminName;
     private JTextField txtAdminName;
