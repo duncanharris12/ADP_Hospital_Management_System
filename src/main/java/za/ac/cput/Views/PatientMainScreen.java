@@ -37,10 +37,14 @@ public class PatientMainScreen extends JDialog implements ActionListener {
 
         }else if (e.getSource() == viewMedicationButton){
 
-        }else if (e.getSource() == viewTestResultsButton){
+        }else if (e.getSource() == viewTestResultsButton)
+        {
 
-        }else if  (e.getSource() == viewMedicalRecordButton){
-
+        }else if  (e.getSource() == viewMedicalRecordButton)
+        {
+            dispose();
+            ViewMedicalRecords vm = new ViewMedicalRecords();
+            vm.setGUI();
         }
     }
 

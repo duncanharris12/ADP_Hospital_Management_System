@@ -122,8 +122,9 @@ public class ViewPatient extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btnBack){
-            new PatientMain().setGUI();
-            new ViewPatient().dispose();
+            dispose();
+            AdminMain am = new AdminMain();
+            am.setGUI();
         }
     }
 }

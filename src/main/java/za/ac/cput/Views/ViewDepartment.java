@@ -12,10 +12,13 @@ import za.ac.cput.Entity.Department;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ViewDepartment extends JFrame
+public class ViewDepartment extends JFrame implements ActionListener
 {
     public static final MediaType JSON
             = MediaType.get("application/JSON; charset=utf-8");
@@ -27,6 +30,9 @@ public class ViewDepartment extends JFrame
     private JTable tblAdmin;
 
     private JPanel pnlCenter;
+    private JPanel pnlSouth;
+
+    private JButton btnBack;
 
     private DefaultTableModel dm;
     //
@@ -37,16 +43,32 @@ public class ViewDepartment extends JFrame
         dm = new DefaultTableModel(col,0);
         tblAdmin = new JTable(dm);
         pnlCenter = new JPanel();
+        pnlSouth = new JPanel();
+        btnBack = new JButton("Back");
     }
 
     public void setGUI()
     {
         add(new JScrollPane(tblAdmin));
+        add(pnlSouth, BorderLayout.SOUTH);
+        pnlSouth.add(btnBack);
+        btnBack.addActionListener(this);
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         getAll();
         populateTable();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource() == btnBack)
+        {
+            dispose();
+            AdminMain am = new AdminMain();
+            am.setGUI();
+        }
     }
 
     private static String run(final String url) throws IOException
@@ -97,7 +119,4 @@ public class ViewDepartment extends JFrame
         }
     }
 
-    public static void main(String[] args) {
-        new ViewDepartment().setGUI();
-    }
 }
