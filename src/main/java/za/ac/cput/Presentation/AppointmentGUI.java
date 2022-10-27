@@ -12,9 +12,9 @@ import javax.swing.*;
 
 /*
  * Book Appointment GUI.java
- * This is the swing gui class
+ * This is an updated file
  * @Author Chuma Nxazonke (219181187)
- * 20 October 2022
+ * 25 October 2022
  */
 public class AppointmentGUI extends JFrame implements ActionListener {
 
