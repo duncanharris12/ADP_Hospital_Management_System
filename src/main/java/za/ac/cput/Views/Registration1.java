@@ -104,7 +104,9 @@ public class Registration1 extends JDialog implements ActionListener{
         }
         else if(e.getSource() == btnCancel)
         {
-            System.exit(0);
+            dispose();
+            AdminMain am = new AdminMain();
+            am.setGUI();
         }
 
 

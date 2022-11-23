@@ -97,7 +97,9 @@ public class PatientMain extends JFrame implements ActionListener
         }
         else if(e.getSource() == btnCancel)
         {
-            System.exit(0);
+            dispose();
+            AdminMain am = new AdminMain();
+            am.setGUI();
         }
     }
 

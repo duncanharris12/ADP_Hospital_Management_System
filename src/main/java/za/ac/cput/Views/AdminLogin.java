@@ -1,52 +1,54 @@
 package za.ac.cput.Views;
 //Author: Duncan, 220110530
 import com.google.gson.Gson;
-import okhttp3.*;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import za.ac.cput.Entity.Administration;
-import za.ac.cput.Factory.AdministrationFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class CreateAdmin extends JFrame implements ActionListener
+public class AdminLogin extends JFrame implements ActionListener
 {
     public static final MediaType JSON
             = MediaType.get("application/JSON; charset=utf-8");
 
     private static OkHttpClient client = new OkHttpClient();
 
-    private Font  f1;
-    private JLabel lblAdminName;
-    private JTextField txtAdminName;
+    private JLabel lblAdminID;
+    private JTextField txtAdminID;
 
     private JLabel lblAdminPassword;
     private JPasswordField txtAdminPassword;
 
-    private JButton btnSave;
+    private JButton btnLogin;
     private JButton btnCancel;
 
     private JPanel pnlCenter;
     private JPanel pnlSouth;
 
-    public CreateAdmin()
+    public AdminLogin()
     {
-        super("Create Administration Account");
+        super("Admin Login");
 
-        lblAdminName = new JLabel("Admin Name");
-        txtAdminName = new JTextField();
+        lblAdminID = new JLabel("Admin ID");
+        txtAdminID = new JTextField();
 
         lblAdminPassword = new JLabel("Admin Password");
         txtAdminPassword = new JPasswordField();
 
-        btnSave = new JButton("Save");
+        btnLogin = new JButton("Login");
         btnCancel = new JButton("Cancel");
 
         pnlCenter = new JPanel();
         pnlSouth = new JPanel();
-
-        f1  = new Font(Font.DIALOG_INPUT,  Font.BOLD|Font.ITALIC, 50);
     }
 
     public void setGui()
@@ -57,20 +59,20 @@ public class CreateAdmin extends JFrame implements ActionListener
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(10, 10, 10, 10);
         c.weighty = 1;
-        pnlCenter.setFont(f1);
+//        pnlCenter.setFont(f1);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.4;
         c.gridx = 0;
         c.gridy = 0;
-        pnlCenter.add(lblAdminName, c);
+        pnlCenter.add(lblAdminID, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.6;
         c.gridx = 1;
         c.gridy = 0;
-        pnlCenter.add(txtAdminName, c);
-        txtAdminName.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        pnlCenter.add(txtAdminID, c);
+        txtAdminID.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.4;
@@ -86,60 +88,61 @@ public class CreateAdmin extends JFrame implements ActionListener
         txtAdminPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 
         pnlSouth.setLayout(new GridLayout());
-        pnlSouth.add(btnSave);
+        pnlSouth.add(btnLogin);
         pnlSouth.add(btnCancel);
-        btnSave.addActionListener(this);
+        btnLogin.addActionListener(this);
         btnCancel.addActionListener(this);
-        this.setFont(f1);
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource() == btnSave)
+        if(e.getSource() == btnLogin)
         {
-            store(txtAdminName.getText(), String.valueOf(txtAdminPassword.getPassword()));
+            getByID(txtAdminID.getText(), String.valueOf(txtAdminPassword.getPassword()));
         }
-        else if(e.getSource()==btnCancel)
+        if(e.getSource() == btnCancel)
         {
             dispose();
-            AdminMain am = new AdminMain();
-            am.setGUI();
+            LoginMain lm = new LoginMain();
+            lm.setGUI();
         }
     }
 
-    public void store(String adminName, String adminPassword)
+    public void getByID(String id, String password)
     {
-        try
-        {
+        try {
             final String URL
-                    ="http://localhost:8080/hospital-management/administration/save/admin";
-            Administration administration = AdministrationFactory.createAdministration(adminName,adminPassword);
+                    = "http://localhost:8080/hospital-management/administration/getAdmin/"+id;
+           String request = run(URL);
             Gson g = new Gson();
-            String jsonString = g.toJson(administration);
-            String request = post(URL, jsonString);
-            if(request != null)
+            Administration admin = g.fromJson(request.toString(), Administration.class);
+            System.out.println(admin.getAdminID()+" "+admin.getAdminPassword()+" "+id+" "+" "+password);
+            if(admin.getAdminID().equals(id) && admin.getAdminPassword().equals(password))
             {
-                JOptionPane.showMessageDialog(null, "Admin Saved");
+                dispose();
+                AdminMain am = new AdminMain();
+                am.setGUI();
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Error- Admin not saved");
+                JOptionPane.showMessageDialog(null, "Invalid Credentials");
             }
+
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    public String post(final String url, String json) throws IOException
+
+    private static String run(final String url) throws IOException
     {
-        RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
                 .url(url)
-                .post(body)
                 .build();
         try(Response response = client.newCall(request).execute())
         {
@@ -147,6 +150,5 @@ public class CreateAdmin extends JFrame implements ActionListener
         }
     }
 
+
 }
-
-
