@@ -2,7 +2,7 @@ package za.ac.cput.Entity;
 
 //This is a worker class for Appointment entity under entity package.
 //In this class will implement an entity called Appointment using a builder pattern.
-//This is Appointment.java
+//Appointment.Java
 
 
 import lombok.AllArgsConstructor;
@@ -32,24 +32,25 @@ public class Appointment {
     private String appointmentID;
 
 
-    @NotNull
-    private  String doctor;
+    @JoinColumn(name = "doctor_id")
+    @OneToOne
+    private Doctor doctor;
 
     @NotNull
     private String appointmentType;
     @NotNull
-    private   String appointmentDescription;
+    private String appointmentDescription;
     @NotNull
-    private  String appointmentDay;
+
+
+    private String appointmentDay;
     @NotNull
     private String appointmentMonth;
 
-
-
 //Creating a private parametrized constructor
 
-    private Appointment (Builder builder){
-        this.appointmentID  = builder.appointmentID;
+    private Appointment(Builder builder) {
+        this.appointmentID = builder.appointmentID;
         this.doctor = builder.build().doctor;
         this.appointmentType = builder.appointmentType;
         this.appointmentDescription = builder.appointmentDescription;
@@ -64,7 +65,7 @@ public class Appointment {
         return appointmentID;
     }
 
-    public String getDoctor() {
+    public Doctor getDoctor() {
         return doctor;
     }
 
@@ -97,11 +98,10 @@ public class Appointment {
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if(this == obj)
+    public boolean equals(Object obj) {
+        if (this == obj)
             return true;
-        if(obj == null || getClass() != obj.getClass())
+        if (obj == null || getClass() != obj.getClass())
             return false;
         Appointment appointment = (Appointment) obj;
         return appointmentID.equals(appointment.appointmentID) && doctor.equals(appointment.doctor)
@@ -115,50 +115,49 @@ public class Appointment {
     }
 
 
-
-    public static class Builder{
+    public static class Builder {
         //Declaring all the fields for the program as private fields
 
         private String appointmentID;
-        private String doctor;
+        private Doctor doctor;
         private String appointmentType;
-        private   String appointmentDescription;
-        private  String appointmentDay;
+        private String appointmentDescription;
+        private String appointmentDay;
         private String appointmentMonth;
 
 
-        public Builder setAppointmentId (String appointmentID1){
+        public Builder setAppointmentId(String appointmentID1) {
             this.appointmentID = appointmentID1;
             return this;
         }
 
-        public Builder setDoctor(String doctor){
+        public Builder setDoctor(Doctor doctor) {
             this.doctor = doctor;
             return this;
         }
 
-        public Builder setAppointmentType ( String appointmentType1){
+        public Builder setAppointmentType(String appointmentType1) {
             this.appointmentType = appointmentType1;
             return this;
         }
 
-        public Builder setAppointmentDescription(String appointmentDescription1){
+        public Builder setAppointmentDescription(String appointmentDescription1) {
             this.appointmentDescription = appointmentDescription1;
             return this;
         }
 
-        public Builder setAppointmentDay(String appointmentDay1){
+        public Builder setAppointmentDay(String appointmentDay1) {
             this.appointmentDay = appointmentDay1;
-            return  this;
+            return this;
         }
 
-        public Builder setAppointmentMonth(String appointmentMonth1){
+        public Builder setAppointmentMonth(String appointmentMonth1) {
             this.appointmentMonth = appointmentMonth1;
             return this;
         }
 
 
-        public Builder Copy (Appointment appointment){
+        public Builder Copy(Appointment appointment) {
 
             this.appointmentID = appointment.appointmentID;
             this.doctor = appointment.doctor;
@@ -171,12 +170,10 @@ public class Appointment {
 
         }
 
-        public Appointment build(){
+        public Appointment build() {
             return new Appointment(this);
         }
 
     }
-
-
 
 }

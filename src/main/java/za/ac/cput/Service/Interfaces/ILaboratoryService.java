@@ -10,6 +10,7 @@ import java.util.Set;
  * @author Chuma Nxazonke
  * Student number: 219181187
  * Date: 15 August 2022
+ *
  */
 
 public interface ILaboratoryService extends IService<Laboratory, String> {

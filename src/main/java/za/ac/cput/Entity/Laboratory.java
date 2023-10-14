@@ -2,7 +2,7 @@ package za.ac.cput.Entity;
 
 //This is a worker class for laboratory entity under entity package.
 //In this class will implement an entity called Laboratory using a builder pattern.
-//This is Laboratory.java
+//Laboratory.Java
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,14 +35,18 @@ public class Laboratory {
 
     private String labID;
 
-    @NotNull
-    private String patient;
+    @Column(name= "patient_id")
+    @OneToOne
+    private Patient pat;
 
-    @NotNull
-    private String doctor;
+    @Column (name = "doctor_id")
+    @OneToOne
+    private Doctor doctor;
 
-    @NotNull
-    private String testPatient;
+    @Column(name = "test_id")
+    @OneToOne
+    private TestPatient testPatient;
+
     @NotNull
     private String labName;
     @NotNull
@@ -60,7 +64,7 @@ public class Laboratory {
 
         this.labID  = builder.labID;
         this.doctor = builder.build().doctor;
-        this.patient = builder.build().patient;
+        this.pat = builder.build().pat;
         this.testPatient = builder.build().testPatient;
         this.labName = builder.labName;
         this.labDay = builder.labDay;
@@ -73,15 +77,15 @@ public class Laboratory {
         return labID;
     }
 
-    public String getPatient() {
-        return patient;
+    public Patient getPatient() {
+        return pat;
     }
 
-    public String getDoctor() {
+    public Doctor getDoctor() {
         return doctor;
     }
 
-    public String getTestPatient() {
+    public TestPatient getTestPatient() {
         return testPatient;
     }
 
@@ -103,7 +107,7 @@ public class Laboratory {
     public String toString() {
         return "Laboratory{" +
                 "labId='" + labID + '\'' +
-                ", patientId='" + patient + '\'' +
+                ", patientId='" + pat + '\'' +
                 ", doctorId='" + doctor + '\'' +
                 ", patientTestId='" + testPatient + '\'' +
                 ", labName='" + labName + '\'' +
@@ -118,7 +122,7 @@ public class Laboratory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Laboratory laboratory = (Laboratory) o;
-        return labID.equals(laboratory.labID) && patient.equals(laboratory.patient)
+        return labID.equals(laboratory.labID) && pat.equals(laboratory.pat)
                 && doctor.equals(laboratory.doctor) && testPatient.equals(laboratory.testPatient)
                 && labName.equals(laboratory.labName) && labDay.equals(laboratory.labDay);
     }
@@ -134,9 +138,9 @@ public class Laboratory {
     public static class Builder{
 
         private String labID;
-        private String patient;
-        private String doctor;
-        private String testPatient;
+        private Patient pat;
+        private Doctor doctor;
+        private TestPatient testPatient;
         private String labName;
         private String labDay;
         private double amount;
@@ -146,17 +150,17 @@ public class Laboratory {
             this.labID = labID1;
             return this;
         }
-        public Builder setPatient (String patient){
-            this.patient = patient;
+        public Builder setPatient (Patient pat){
+            this.pat = pat;
             return this;
         }
 
-        public Builder setDoctor (String doctor){
+        public Builder setDoctor (Doctor doctor){
             this.doctor = doctor;
             return this;
         }
 
-        public Builder setTestPatient (String testPatient){
+        public Builder setTestPatient (TestPatient testPatient){
             this.testPatient = testPatient;
             return this;
         }
@@ -179,7 +183,7 @@ public class Laboratory {
         public Builder Copy (Laboratory laboratory){
 
             this.labID = laboratory.labID;
-            this.patient = laboratory.patient;
+            this.pat = laboratory.pat;
             this.doctor = laboratory.doctor;
             this.testPatient = laboratory.testPatient;
             this.labName = laboratory.labName;

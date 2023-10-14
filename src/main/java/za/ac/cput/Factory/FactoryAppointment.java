@@ -6,15 +6,15 @@ package za.ac.cput.Factory;
  * Date: 07 April 2022
  * This is an updated version
  */
-import za.ac.cput.Entity.Appointment;
 import za.ac.cput.Entity.Doctor;
+import za.ac.cput.Entity.Appointment;
 import za.ac.cput.util.Helper;
 
 public class FactoryAppointment {
 
-    public static Appointment createAppointment(String doctor, String appointmentType, String appointmentDescription, String appointmentDay, String appointmentMonth){
+    public static Appointment createAppointment( String appointmentID, Doctor doctor, String appointmentType, String appointmentDescription, String appointmentDay, String appointmentMonth){
 
-        String appointmentID = Helper.generateAppointmentID();
+        //String appointmentID = Helper.generateAppointmentID();
 
         if (Helper.isNullorEmpty(appointmentDescription) || Helper.isNullorEmpty(appointmentDescription))
             return null;

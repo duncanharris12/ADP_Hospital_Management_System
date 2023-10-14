@@ -1,5 +1,5 @@
 package za.ac.cput.Service.Impl;
-
+//This is AppointmentServiceTest.java
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,14 +23,20 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AppointmentServiceTest {
 
+    private final Department department = DepartmentFactory.createDepartment(
+            "NU",
+            "Nursing Unit",
+            50);
 
+    private final Doctor doctor = DoctorFactory.createDoctor("Chante Davids", "RandomPassword123", department, "Midwife Nurse");
 
-    private final Appointment appointment1 = FactoryAppointment.createAppointment("Dr Nxazonke", "I think I have a headache", "12 Wednesday 2022", "August", "June");
-    private final Appointment appointment2 = FactoryAppointment.createAppointment("Dr Nxazonke", "I think I have a headache", "12 Wednesday 2022", "August", "July");
-    private final Appointment appointment3 = FactoryAppointment.createAppointment("Dr Nxazonke", "I think I have a headache", "12 Wednesday 2022", "August", "August");
-    private final Appointment appointment4 = FactoryAppointment.createAppointment("Dr Nxazonke", "I think I have a headache", "12 Wednesday 2022", "August", "September");
-    private final Appointment appointment5 = FactoryAppointment.createAppointment("Dr Nxazonke", "I think I have a headache", "12 Wednesday 2022", "August", "October");
-    private final Appointment appointment6 = FactoryAppointment.createAppointment("Dr Nxazonke", "I think I have a headache", "12 Wednesday 2022", "August", "November");
+    private final Appointment appointment1 = FactoryAppointment.createAppointment("B125", doctor,"Sickness", "I have a flue","Monday", "October");
+    private final Appointment appointment2 = FactoryAppointment.createAppointment("B125", doctor,"Headache","I think I have a headache","Tuesday","October");
+    private final Appointment appointment3 = FactoryAppointment.createAppointment("B145",doctor,"HIV Test", "I have a rush I would like to test for hiv","Wednesday","October");
+    private final Appointment appointment4 = FactoryAppointment.createAppointment("B146",doctor,"HIV Test", "I have a rush I would like to test for hiv","Thursday","October");
+    private final Appointment appointment5 = FactoryAppointment.createAppointment("B147",doctor,"Consultation", "I would like to book an appointment for a consultation","Wednesday","October");
+    private final Appointment appointment6 = FactoryAppointment.createAppointment("B148",doctor,"HIV Test", "I have a rush I would like to test for hiv","Friday","October");
+
 
 
     @Autowired
@@ -88,7 +94,7 @@ class AppointmentServiceTest {
     @Order(2)
     @Test void getAll() {
         System.out.println("Get All: ");
-        System.out.println(service.getAppointment());
+        System.out.println(service.getAll());
     }
 
 }

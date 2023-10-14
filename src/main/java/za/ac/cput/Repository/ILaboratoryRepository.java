@@ -1,4 +1,6 @@
 package za.ac.cput.Repository;
+//This is an interface that has a get all method
+//This is ILaboratoryRepository.java
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
